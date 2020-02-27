@@ -8,12 +8,22 @@ public class test {
     public static void main(String[]args){
 
 
+								//Integrate this part with buttons from GUI so values are recieved
+				
                 Scanner in = new Scanner(System.in);
 
                 System.out.println("Enter first name");
-                String test = in.nextLine();
-                System.out.println("Enter lastname");
-                String test2 = in.nextLine();
+                String firstName = in.nextLine();
+                
+								System.out.println("Enter lastname");
+                String lastName = in.nextLine();
+                
+								System.out.println("Insert postcode");
+                String postCode = in.nextLine();
+                
+								System.out.println("Insert telephone number");
+                int telno_user = in.nextInt();
+
 
 
                 try{
@@ -29,11 +39,13 @@ public class test {
                     Statement myStatement = myConnection.createStatement();
 
                     //execute query(step 3)
-                    String query = "insert into Customer (firstname, lastname)" + "values (?, ?)";
+                    String query = "insert into Customer (firstname, lastname, postcode, telno )" + "values (?, ?, ?, ?)";
 
                     PreparedStatement preparedStmt = myConnection.prepareStatement(query);
-                    preparedStmt.setString(1,test);
-                    preparedStmt.setString(2,test2);
+                    preparedStmt.setString(1,firstName);
+                    preparedStmt.setString(2,lastName);
+                    preparedStmt.setString(3,postCode);
+                    preparedStmt.setInt(4,telno_user);
                     preparedStmt.execute();
 
                     myConnection.close();
