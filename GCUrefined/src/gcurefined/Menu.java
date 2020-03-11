@@ -447,10 +447,9 @@ public class Menu extends javax.swing.JFrame {
         rs=pst.executeQuery();
         
         if(rs.next()){
-            JOptionPane.showMessageDialog(null, "Login Successfully");
+            JOptionPane.showMessageDialog(null, "Logged in as staff");
             this.dispose();
-            GCUbake test = new GCUbake();
-            test.setVisible(true);
+            
             
         }
         
