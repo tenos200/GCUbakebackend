@@ -33,7 +33,7 @@ public class Menu extends javax.swing.JFrame {
         try{
         String mysqlUrl = "jdbc:mysql://127.0.0.1:3306/GCUbake";
         String username = "root";
-        String password = "";
+        String password = "Password";
         con = DriverManager.getConnection(mysqlUrl ,username,password);
         }
         catch(Exception e){
@@ -58,6 +58,7 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel4 = new javax.swing.JPanel();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         txtLoginuser = new javax.swing.JTextField();
@@ -81,6 +82,12 @@ public class Menu extends javax.swing.JFrame {
         txtRegemail = new javax.swing.JTextField();
         txtRegusername = new javax.swing.JTextField();
         txtRegpassword = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txtStaffloginuser = new javax.swing.JTextField();
+        txtStaffloginpass = new javax.swing.JTextField();
+        btnStafflogin = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -266,6 +273,59 @@ public class Menu extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Register", jPanel2);
 
+        jLabel9.setText("Username");
+
+        jLabel11.setText("Password");
+
+        btnStafflogin.setText("Login");
+        btnStafflogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStaffloginActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(txtStaffloginuser, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(jLabel9)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtStaffloginpass, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)))
+                .addGap(57, 57, 57))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addComponent(btnStafflogin, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(103, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtStaffloginuser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtStaffloginpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addComponent(btnStafflogin)
+                .addGap(63, 63, 63))
+        );
+
+        jTabbedPane1.addTab("Staff", jPanel3);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -341,7 +401,7 @@ public class Menu extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
             
         
-        String pass = txtLoginpass.getText();
+        
         try{
             getConnection();
             
@@ -375,6 +435,37 @@ public class Menu extends javax.swing.JFrame {
     private void txtLoginuserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginuserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLoginuserActionPerformed
+
+    private void btnStaffloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStaffloginActionPerformed
+        
+        try{
+            getConnection();
+            
+            
+        String query ="SELECT * FROM Staff Where username='"+txtStaffloginuser.getText()+ "' and password='" +txtStaffloginpass.getText() + "'";
+        pst=con.prepareStatement(query);
+        rs=pst.executeQuery();
+        
+        if(rs.next()){
+            JOptionPane.showMessageDialog(null, "Login Successfully");
+            this.dispose();
+            GCUbake test = new GCUbake();
+            test.setVisible(true);
+            
+        }
+        
+        else{
+            JOptionPane.showMessageDialog(null, "Invalid credentials");
+            
+            
+            }                                        
+        } 
+    catch(Exception e){
+        JOptionPane.showMessageDialog(null, e);
+            
+            
+        }
+    }//GEN-LAST:event_btnStaffloginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -412,11 +503,13 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnStafflogin;
     private javax.swing.JComboBox<String> cmbReggender;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -424,10 +517,13 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextField txtLoginpass;
     private javax.swing.JTextField txtLoginuser;
     private javax.swing.JTextField txtRegemail;
@@ -436,5 +532,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JTextField txtRegpassword;
     private javax.swing.JTextField txtRegphone;
     private javax.swing.JTextField txtRegusername;
+    private javax.swing.JTextField txtStaffloginpass;
+    private javax.swing.JTextField txtStaffloginuser;
     // End of variables declaration//GEN-END:variables
 }
