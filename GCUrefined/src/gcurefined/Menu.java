@@ -33,7 +33,7 @@ public class Menu extends javax.swing.JFrame {
         try{
         String mysqlUrl = "jdbc:mysql://127.0.0.1:3306/GCUbake";
         String username = "root";
-        String password = "Itsmrrobot96";
+        String password = "";
         con = DriverManager.getConnection(mysqlUrl ,username,password);
         }
         catch(Exception e){
