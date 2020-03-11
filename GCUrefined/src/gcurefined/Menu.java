@@ -352,6 +352,10 @@ public class Menu extends javax.swing.JFrame {
         
         if(rs.next()){
             JOptionPane.showMessageDialog(null, "Login Successfully");
+            this.dispose();
+            GCUbake test = new GCUbake();
+            test.setVisible(true);
+            
         }
         
         else{
