@@ -71,8 +71,6 @@ public class Menu extends javax.swing.JFrame {
         
         }
     
-        
-    
     
     }
     protected void createTables(){
@@ -80,8 +78,9 @@ public class Menu extends javax.swing.JFrame {
             getConnection();
             //A backend method which creates the tables on the specified unit if it does not exist
             
-            String createQuery1 = "CREATE TABLE IF NOT EXISTS User("
-                 + "userID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(userID),"
+           String createQuery1 = "CREATE TABLE IF NOT EXISTS Customer("
+                 + "customerID INT NOT NULL AUTO_INCREMENT, "
+                 + "PRIMARY KEY(customerID),"
                  + "customerStatus TEXT,"
                  + "title TEXT,"
                  + "firstname TEXT,"
@@ -90,6 +89,8 @@ public class Menu extends javax.swing.JFrame {
                  + "email TEXT,"
                  + "username TEXT,"
                  + "password TEXT);";
+            
+           
             pst = con.prepareStatement(createQuery1);
             pst.execute();
             
@@ -106,16 +107,21 @@ public class Menu extends javax.swing.JFrame {
             pst.execute();
             
          String createQuery3 = "CREATE TABLE IF NOT EXISTS Login("
-                 + "loginID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(loginID),"
+                 + "loginID INT NOT NULL AUTO_INCREMENT, "
+                 + "PRIMARY KEY(loginID),"
                  + "username TEXT,"
                  + "password TEXT);";
             pst = con.prepareStatement(createQuery3);
             pst.execute();
             
-            String createQuery4 = "CREATE TABLE IF NOT EXISTS Lessons("
-                 + "lessonID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(lessonID),"
+            
+             String createQuery4 = "CREATE TABLE IF NOT EXISTS Lessons("
+                 + "lessonID INT NOT NULL AUTO_INCREMENT, "
+                 + "PRIMARY KEY(lessonID),"
+                 + "customerID INT,"
                  + "lessonType TEXT,"
-                 + "lessonSatus TEXT);";
+                 + "FOREIGN KEY(customerID) REFERENCES Customer(CustomerID));";
+            
          pst = con.prepareStatement(createQuery4);
          pst.execute();
          
@@ -437,7 +443,7 @@ public class Menu extends javax.swing.JFrame {
       if(regPassword1.getText().equals(regPassword2.getText())){
       try{
             
-            String query = "insert into User(customerStatus, title, firstname, lastname, contactNo, email, username, password)" 
+            String query = "insert into Customer(customerStatus, title, firstname, lastname, contactNo, email, username, password)" 
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             pst = con.prepareStatement(query);
             
