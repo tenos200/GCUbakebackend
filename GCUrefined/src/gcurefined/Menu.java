@@ -56,20 +56,22 @@ public class Menu extends javax.swing.JFrame {
     
     }
     //creates the connection for the mysql server
-    protected void getConnection(){
+    protected Connection getConnection(){
         
         try{
         String mysqlUrl = "jdbc:mysql://127.0.0.1:3306/GCUBake";
         String username = "root";
         String password = "Password";
         con = DriverManager.getConnection(mysqlUrl ,username,password);
+        
+        return con;
         }
         catch(Exception e){
             System.err.println("Got an exception");
             System.err.println(e.getMessage());
         
         
-        }
+        }return null;
     
     
     }
@@ -120,6 +122,7 @@ public class Menu extends javax.swing.JFrame {
                  + "PRIMARY KEY(lessonID),"
                  + "customerID INT,"
                  + "lessonType TEXT,"
+                 + "sessionsRequired TEXT,"
                  + "FOREIGN KEY(customerID) REFERENCES Customer(CustomerID));";
             
          pst = con.prepareStatement(createQuery4);
@@ -447,7 +450,7 @@ public class Menu extends javax.swing.JFrame {
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             pst = con.prepareStatement(query);
             
-            pst.setString(1,"Beginner");
+            pst.setString(1, null);
             pst.setString(2,cmbReggender.getSelectedItem().toString());
             pst.setString(3,txtRegfirstname.getText());
             pst.setString(4,txtReglastname.getText());
