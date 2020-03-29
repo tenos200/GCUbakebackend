@@ -20,6 +20,7 @@ public class Menu extends javax.swing.JFrame {
     PreparedStatement pst = null;
     Statement stmt = null;
     ResultSet rs = null;
+    boolean usernameExist = true;
     
 
     /**
@@ -30,6 +31,7 @@ public class Menu extends javax.swing.JFrame {
         createDatabase();
         createTables();
     }
+    
     
     protected void createDatabase(){
         //creates the database GCUBake
@@ -79,7 +81,6 @@ public class Menu extends javax.swing.JFrame {
         try{
             getConnection();
             //A backend method which creates the tables on the specified unit if it does not exist
-            
            String createQuery1 = "CREATE TABLE IF NOT EXISTS Customer("
                  + "customerID INT NOT NULL AUTO_INCREMENT, "
                  + "PRIMARY KEY(customerID),"
@@ -89,8 +90,9 @@ public class Menu extends javax.swing.JFrame {
                  + "lastname TEXT,"
                  + "contactNo TEXT,"
                  + "email TEXT,"
-                 + "username TEXT,"
-                 + "password TEXT);";
+                 + "username VARCHAR(250),"
+                 + "password TEXT,"
+                 + "UNIQUE KEY(username));";
             
            
             pst = con.prepareStatement(createQuery1);
@@ -446,35 +448,23 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
      //create my mysql database connection
+     /*Important method for the program ensures that username is unique and can be used as user
+     identificaiton during booking.
+     */
+     
      getConnection();
      
-      
+  
       try{
-            
-            String compare_username1 = txtRegusername.getText();
-            pst = con.prepareStatement("SELECT username FROM Customer");
-            ResultSet rs = pst.executeQuery();
-            
-            if(rs.next()){
-            
-            String compare_username2 = rs.getString("username");
-            
-            if(compare_username1.equals(compare_username2)){
-                JOptionPane.showMessageDialog(null,  txtRegusername.getText() + " username already taken");
-               
-            
-            }
-            
-            }
-            
-          // if statement ensures that both passwords entered match
-          if(regPassword1.getText().equals(regPassword2.getText())){
+          //if statement ensures that both passwords entered match
+          
+           if(regPassword1.getText().equals(regPassword2.getText())){ 
             String query = "insert into Customer(customerStatus, title, firstname, lastname, contactNo, email, username, password)" 
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             
             pst = con.prepareStatement(query);
             
-            pst.setString(1, null);
+            pst.setString(1, "Beginner");
             pst.setString(2,cmbReggender.getSelectedItem().toString());
             pst.setString(3,txtRegfirstname.getText());
             pst.setString(4,txtReglastname.getText());
@@ -502,15 +492,15 @@ public class Menu extends javax.swing.JFrame {
             txtRegusername.setText("");
             regPassword1.setText("");
             regPassword2.setText("");
-            
-          
-                    
-          } 
-        else{
-            JOptionPane.showMessageDialog(null, "Passwords do not match");
-                }
+     
       }
-        
+           else{
+               System.out.println("Password does not match");
+           
+           
+           }
+      }
+      
         catch (Exception e){
 
             System.err.println("Got an exception");
