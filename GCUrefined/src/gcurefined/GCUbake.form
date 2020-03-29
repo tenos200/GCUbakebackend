@@ -75,35 +75,55 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel1" pref="131" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cmbBooklesson" min="-2" pref="134" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="258" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel1" min="-2" pref="172" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="cmbBooklesson" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="74" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="305" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
-                      <Component id="btnLessonbooked" min="-2" pref="277" max="-2" attributes="0"/>
-                      <EmptySpace pref="147" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="btnLessonbooked" min="-2" pref="277" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabel4" min="-2" pref="68" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jTextField1" min="-2" pref="169" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="67" pref="67" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cmbBooklesson" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="cmbBooklesson" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane2" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
+                          <Component id="jScrollPane2" min="-2" pref="108" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="166" max="32767" attributes="0"/>
                       <Component id="btnLessonbooked" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -111,15 +131,13 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Lessons available"/>
+                <Property name="text" type="java.lang.String" value="Lessons available:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="cmbBooklesson">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="1">
-                    <StringItem index="0" value="1"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
               </Properties>
               <Events>
@@ -148,11 +166,18 @@
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
-                    <Property name="text" type="java.lang.String" value="Our system updates whenever a new&#xa;lessons is avaiable! You can look &#xa;through them by using the drop-down&#xa;menu in the middle of the screen"/>
+                    <Property name="text" type="java.lang.String" value="Our system updates whenever a new&#xa;lessons is avaiable! You can look &#xa;through them by using the drop-down&#xa;menu. If you would like to book one of the&#xa;available lessons you need to enter your&#xa;username."/>
                   </Properties>
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JLabel" name="jLabel4">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Username:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextField1">
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel2">
@@ -169,7 +194,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jScrollPane1" min="-2" pref="512" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="35" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="51" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
@@ -246,7 +271,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane3" pref="510" max="32767" attributes="0"/>
+                      <Component id="jScrollPane3" pref="526" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
@@ -323,7 +348,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                       <Component id="btnCustomerLogout" min="-2" pref="345" max="-2" attributes="0"/>
-                      <EmptySpace pref="115" max="32767" attributes="0"/>
+                      <EmptySpace pref="131" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

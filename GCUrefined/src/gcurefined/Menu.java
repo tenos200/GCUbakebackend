@@ -448,10 +448,6 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
      //create my mysql database connection
-     /*Important method for the program ensures that username is unique and can be used as user
-     identificaiton during booking.
-     */
-     
      getConnection();
      
   
@@ -494,9 +490,10 @@ public class Menu extends javax.swing.JFrame {
             regPassword2.setText("");
      
       }
+          
            else{
-               System.out.println("Password does not match");
-           
+               
+               JOptionPane.showMessageDialog(null, "Passwords do not match");
            
            }
       }
@@ -505,7 +502,10 @@ public class Menu extends javax.swing.JFrame {
 
             System.err.println("Got an exception");
             System.err.println(e.getMessage());
-            JOptionPane.showMessageDialog(null, "Something went wrong try to register again");
+            /*added statement here since I could not figure out a way to print specific 
+            error when uniquness constraint was met on username column in customer table
+            */
+            JOptionPane.showMessageDialog(null, "Username already taken");
                 }
           
           

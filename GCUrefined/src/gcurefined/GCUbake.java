@@ -33,13 +33,18 @@ public class GCUbake extends javax.swing.JFrame {
     private void checkLessons(){
         
     try{
+        
+        //retrieves the lessons that are available from the lessons table so that the user can book it.
             run.getConnection();
             conn = run.con;
-            String selectQuery = "SELECT lessonType FROM Lessons";
-            ResultSet rs = pst.executeQuery(selectQuery);
+            
+            String selectQuery = "SELECT * FROM Lessons";
+            pst = conn.prepareStatement(selectQuery);
+            ResultSet rs = pst.executeQuery();
             
             while(rs.next()){
-            cmbBooklesson.addItem(rs.getString("lessonType"));
+            String lessons = rs.getString("lessonType");
+            cmbBooklesson.addItem(lessons);
             
             
             }
@@ -76,6 +81,8 @@ public class GCUbake extends javax.swing.JFrame {
         btnLessonbooked = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         txtLesson_on_going = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -107,9 +114,8 @@ public class GCUbake extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Lessons available");
+        jLabel1.setText("Lessons available:");
 
-        cmbBooklesson.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1" }));
         cmbBooklesson.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbBooklessonActionPerformed(evt);
@@ -125,38 +131,54 @@ public class GCUbake extends javax.swing.JFrame {
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
-        jTextArea2.setText("Our system updates whenever a new\nlessons is avaiable! You can look \nthrough them by using the drop-down\nmenu in the middle of the screen");
+        jTextArea2.setText("Our system updates whenever a new\nlessons is avaiable! You can look \nthrough them by using the drop-down\nmenu. If you would like to book one of the\navailable lessons you need to enter your\nusername.");
         jScrollPane2.setViewportView(jTextArea2);
+
+        jLabel4.setText("Username:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbBooklesson, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbBooklesson, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(123, 123, 123)
-                .addComponent(btnLessonbooked, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(147, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnLessonbooked, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(137, 137, 137))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
                         .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmbBooklesson, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
                 .addComponent(btnLessonbooked)
-                .addGap(17, 17, 17))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Book Lesson", jPanel1);
@@ -176,7 +198,7 @@ public class GCUbake extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 35, Short.MAX_VALUE))
+                .addGap(0, 51, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,7 +247,7 @@ public class GCUbake extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
                 .addGap(31, 31, 31))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
@@ -263,7 +285,7 @@ public class GCUbake extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(87, 87, 87)
                 .addComponent(btnCustomerLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -351,6 +373,7 @@ public class GCUbake extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -362,6 +385,7 @@ public class GCUbake extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txtLesson_on_going;
     // End of variables declaration//GEN-END:variables
 }
