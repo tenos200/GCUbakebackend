@@ -140,7 +140,7 @@ public class staffPage extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(cmbSessionsRequired, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnViewtable)
                     .addComponent(jButton5))
                 .addGap(49, 49, 49))
@@ -207,13 +207,13 @@ public class staffPage extends javax.swing.JFrame {
 
             pst = conn.prepareStatement("SELECT * FROM Lessons");
             ResultSet rs = pst.executeQuery();
-            DefaultTableModel tm = (DefaultTableModel)tableLessons.getModel();
-            tm.setRowCount(0);
+            DefaultTableModel table = (DefaultTableModel)tableLessons.getModel();
+            table.setRowCount(0);
 
             while(rs.next()){
 
                 Object o[]={rs.getInt("LessonID"), rs.getInt("CustomerID"), rs.getString("lessonType"), rs.getString("sessionsRequired")};
-                tm.addRow(o);
+                table.addRow(o);
 
             }
 
