@@ -20,7 +20,6 @@ public class Menu extends javax.swing.JFrame {
     PreparedStatement pst = null;
     Statement stmt = null;
     ResultSet rs = null;
-    boolean usernameExist = true;
     
 
     /**
@@ -122,10 +121,10 @@ public class Menu extends javax.swing.JFrame {
              String createQuery4 = "CREATE TABLE IF NOT EXISTS Lessons("
                  + "lessonID INT NOT NULL AUTO_INCREMENT, "
                  + "PRIMARY KEY(lessonID),"
-                 + "customerID INT,"
+                 + "customerID VARCHAR(250),"
                  + "lessonType TEXT,"
                  + "sessionsRequired TEXT,"
-                 + "FOREIGN KEY(customerID) REFERENCES Customer(CustomerID));";
+                 + "FOREIGN KEY(customerID) REFERENCES Customer(username));";
             
          pst = con.prepareStatement(createQuery4);
          pst.execute();
