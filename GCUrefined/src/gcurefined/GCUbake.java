@@ -20,6 +20,7 @@ public class GCUbake extends javax.swing.JFrame {
     PreparedStatement pst = null;
     Connection conn = null;
     Menu run = new Menu();
+    String loggedinUser;
 
     /**
      * Creates new form GCUbake
@@ -27,6 +28,10 @@ public class GCUbake extends javax.swing.JFrame {
     public GCUbake() {
         initComponents();
         checkLessons();
+        loggedinUser = run.logged_in_customer;
+        System.out.println(loggedinUser);
+        
+        
        
     }
     
@@ -322,9 +327,18 @@ public class GCUbake extends javax.swing.JFrame {
         // Buttons for customer to book lessons use username as identifier for the bookings
         try{
             
+            
         run.getConnection();
         conn = run.con;
         
+        
+        String booking = "INSERT INTO Bookings(customerID, GCU_lesson, GCU_rank)"
+                +"VALUES(?,?,?)";
+        pst.setString(1, txtUserID.getText());
+        pst.setString(2,cmbLessons_available.getSelectedItem().toString());
+        pst.setString(3, "Beginner");
+        pst = conn.prepareStatement(booking);
+        pst.execute();
         
         /*
         used this clause as testint to ensure that values from combobox could be recieved

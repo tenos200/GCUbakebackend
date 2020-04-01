@@ -89,7 +89,7 @@ public class staffPage extends javax.swing.JFrame {
 
         jLabel6.setText("Sessions Required:");
 
-        cmbSessionsRequired.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1h", "2h", "3h", "4h" }));
+        cmbSessionsRequired.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

@@ -20,6 +20,7 @@ public class Menu extends javax.swing.JFrame {
     PreparedStatement pst = null;
     Statement stmt = null;
     ResultSet rs = null;
+    String logged_in_customer;
     
 
     /**
@@ -29,6 +30,7 @@ public class Menu extends javax.swing.JFrame {
         initComponents();
         createDatabase();
         createTables();
+        
     }
     
     
@@ -53,9 +55,12 @@ public class Menu extends javax.swing.JFrame {
         System.err.println(e.getMessage());
         
         }
-    
-    
     }
+    
+       
+        
+        
+        
     //creates the connection for the mysql server
     protected Connection getConnection(){
         
@@ -80,7 +85,7 @@ public class Menu extends javax.swing.JFrame {
         try{
             getConnection();
             //A backend method which creates the tables on the specified unit if it does not exist
-           String createQuery1 = "CREATE TABLE IF NOT EXISTS Customer("
+           String createTable1 = "CREATE TABLE IF NOT EXISTS Customer("
                  + "customerID INT NOT NULL AUTO_INCREMENT, "
                  + "PRIMARY KEY(customerID),"
                  + "customerStatus TEXT,"
@@ -94,10 +99,10 @@ public class Menu extends javax.swing.JFrame {
                  + "UNIQUE KEY(username));";
             
            
-            pst = con.prepareStatement(createQuery1);
+            pst = con.prepareStatement(createTable1);
             pst.execute();
             
-         String createQuery2 = "CREATE TABLE IF NOT EXISTS Staff("
+         String createTable2 = "CREATE TABLE IF NOT EXISTS Staff("
                  + "staffID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(staffID),"
                  + "role TEXT,"
                  + "firstname TEXT,"
@@ -106,28 +111,44 @@ public class Menu extends javax.swing.JFrame {
                  + "email TEXT,"
                  + "username TEXT,"
                  + "password TEXT);";
-            pst = con.prepareStatement(createQuery2);
+            pst = con.prepareStatement(createTable2);
             pst.execute();
             
-         String createQuery3 = "CREATE TABLE IF NOT EXISTS Login("
+         String createTable3 = "CREATE TABLE IF NOT EXISTS Login("
                  + "loginID INT NOT NULL AUTO_INCREMENT, "
                  + "PRIMARY KEY(loginID),"
                  + "username TEXT,"
                  + "password TEXT);";
-            pst = con.prepareStatement(createQuery3);
+            pst = con.prepareStatement(createTable3);
             pst.execute();
             
             
-             String createQuery4 = "CREATE TABLE IF NOT EXISTS Lessons("
+             String createTable4 = "CREATE TABLE IF NOT EXISTS Lessons("
                  + "lessonID INT NOT NULL AUTO_INCREMENT, "
                  + "PRIMARY KEY(lessonID),"
-                 + "customerID VARCHAR(250),"
-                 + "lessonType TEXT,"
-                 + "sessionsRequired TEXT,"
-                 + "FOREIGN KEY(customerID) REFERENCES Customer(username));";
+                 + "lessonType VARCHAR(250),"
+                 + "UNIQUE(lessonType),"
+                 + "sessionsRequired VARCHAR(250),"
+                 + "UNIQUE(sessionsRequired)"
+                 + ");";
             
-         pst = con.prepareStatement(createQuery4);
+         pst = con.prepareStatement(createTable4);
          pst.execute();
+         
+            String createTable5 = "CREATE TABLE IF NOT EXISTS Bookings("
+                    + "bookingID INT NOT NULL AUTO_INCREMENT,"
+                    + "PRIMARY KEY(bookingID),"
+                    + "customerID VARCHAR(250),"
+                    + "GCU_lesson VARCHAR(250),"
+                    + "length VARCHAR(250),"
+                    + "GCU_rank VARCHAR(250),"
+                    + "FOREIGN KEY(customerID) REFERENCES Customer(username),"
+                    + "FOREIGN KEY(GCU_lesson) REFERENCES Lessons(lessonType),"
+                    + "FOREIGN KEY(length) REFERENCES Lessons(sessionsRequired)"
+                    + ");";
+            
+            pst = con.prepareStatement(createTable5);
+            pst.execute();
          
          con.close();
             }
@@ -520,13 +541,17 @@ public class Menu extends javax.swing.JFrame {
         
         try{
             getConnection();
-            
-            
+             
         String query ="SELECT * FROM Login Where username='"+txtLoginuser.getText()+ "' and password='" +txtLoginpass.getText() + "'";
+        
+        
+        logged_in_customer = txtLoginuser.getText();
+        System.out.println(logged_in_customer);
         pst=con.prepareStatement(query);
         rs=pst.executeQuery();
         
         if(rs.next()){
+            System.out.println(logged_in_customer);
             JOptionPane.showMessageDialog(null, "Login Successfully");
             this.dispose();
             GCUbake test = new GCUbake();
@@ -561,6 +586,7 @@ public class Menu extends javax.swing.JFrame {
         String query ="SELECT * FROM Staff Where username='"+txtStaffloginuser.getText()+ "' and password='" +txtStaffloginpass.getText() + "'";
         pst=con.prepareStatement(query);
         rs=pst.executeQuery();
+        
         
         if(rs.next()){
             JOptionPane.showMessageDialog(null, "Logged in as staff");
