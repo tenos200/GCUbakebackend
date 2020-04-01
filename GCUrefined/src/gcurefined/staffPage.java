@@ -58,13 +58,13 @@ public class staffPage extends javax.swing.JFrame {
 
         tableLessons.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "LessonID", "CustomerID", "LessonType", "Sessions"
+                "LessonID", "LessonType", "Sessions"
             }
         ));
         jScrollPane1.setViewportView(tableLessons);
@@ -212,7 +212,7 @@ public class staffPage extends javax.swing.JFrame {
 
             while(rs.next()){
 
-                Object o[]={rs.getInt("LessonID"), rs.getInt("CustomerID"), rs.getString("lessonType"), rs.getString("sessionsRequired")};
+                Object o[]={rs.getInt("LessonID"), rs.getString("lessonType"), rs.getString("sessionsRequired")};
                 table.addRow(o);
 
             }

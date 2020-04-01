@@ -23,9 +23,8 @@ public class Menu extends javax.swing.JFrame {
     String logged_in_customer;
     
 
-    /**
-     * Creates new form Menu
-     */
+    //Creates new form Menu
+     
     public Menu() {
         initComponents();
         createDatabase();
@@ -36,6 +35,7 @@ public class Menu extends javax.swing.JFrame {
     
     protected void createDatabase(){
         //creates the database GCUBake
+        
         try{
         
         String database = "jdbc:mysql://127.0.0.1:3306/";
@@ -61,9 +61,10 @@ public class Menu extends javax.swing.JFrame {
         
         
         
-    //creates the connection for the mysql server
+    
     protected Connection getConnection(){
-        
+    //creates the connection for the mysql server 
+    
         try{
         String mysqlUrl = "jdbc:mysql://127.0.0.1:3306/GCUBake";
         String username = "root";
@@ -126,10 +127,11 @@ public class Menu extends javax.swing.JFrame {
              String createTable4 = "CREATE TABLE IF NOT EXISTS Lessons("
                  + "lessonID INT NOT NULL AUTO_INCREMENT, "
                  + "PRIMARY KEY(lessonID),"
+                 + "Customer VARCHAR(250),"
                  + "lessonType VARCHAR(250),"
                  + "UNIQUE(lessonType),"
-                 + "sessionsRequired VARCHAR(250),"
-                 + "UNIQUE(sessionsRequired)"
+                 + "sessionsRequired TEXT,"
+                 + "FOREIGN KEY(customer) REFERENCES Customer(username)"
                  + ");";
             
          pst = con.prepareStatement(createTable4);
@@ -140,15 +142,13 @@ public class Menu extends javax.swing.JFrame {
                     + "PRIMARY KEY(bookingID),"
                     + "customerID VARCHAR(250),"
                     + "GCU_lesson VARCHAR(250),"
-                    + "length VARCHAR(250),"
                     + "GCU_rank VARCHAR(250),"
                     + "FOREIGN KEY(customerID) REFERENCES Customer(username),"
-                    + "FOREIGN KEY(GCU_lesson) REFERENCES Lessons(lessonType),"
-                    + "FOREIGN KEY(length) REFERENCES Lessons(sessionsRequired)"
-                    + ");";
+                    + "FOREIGN KEY(GCU_lesson) REFERENCES Lessons(lessonType));";
             
             pst = con.prepareStatement(createTable5);
             pst.execute();
+         
          
          con.close();
             }
@@ -475,12 +475,12 @@ public class Menu extends javax.swing.JFrame {
           //if statement ensures that both passwords entered match
           
            if(regPassword1.getText().equals(regPassword2.getText())){ 
-            String query = "insert into Customer(customerStatus, title, firstname, lastname, contactNo, email, username, password)" 
+            String query = "INSERT INTO Customer(customerStatus, title, firstname, lastname, contactNo, email, username, password)" 
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             
             pst = con.prepareStatement(query);
             
-            pst.setString(1, "Beginner");
+            pst.setString(1, null);
             pst.setString(2,cmbReggender.getSelectedItem().toString());
             pst.setString(3,txtRegfirstname.getText());
             pst.setString(4,txtReglastname.getText());
@@ -535,6 +535,22 @@ public class Menu extends javax.swing.JFrame {
       
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    
+    public void passUsername(){
+        /*this method was built to pass the username which was eneterd as a string in order to 
+        be able to identify which user was logged in.
+        */
+        
+        logged_in_customer = txtLoginuser.getText();
+        GCUbake test = new GCUbake(logged_in_customer);
+        this.dispose();
+        test.setVisible(true);
+        
+        
+        
+        
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
             
         
@@ -545,18 +561,15 @@ public class Menu extends javax.swing.JFrame {
         String query ="SELECT * FROM Login Where username='"+txtLoginuser.getText()+ "' and password='" +txtLoginpass.getText() + "'";
         
         
-        logged_in_customer = txtLoginuser.getText();
-        System.out.println(logged_in_customer);
         pst=con.prepareStatement(query);
         rs=pst.executeQuery();
         
         if(rs.next()){
-            System.out.println(logged_in_customer);
+            logged_in_customer = txtLoginuser.getText();
             JOptionPane.showMessageDialog(null, "Login Successfully");
-            this.dispose();
-            GCUbake test = new GCUbake();
-            test.setVisible(true);
-            
+            System.out.println(logged_in_customer);
+            passUsername();
+           
         }
         
         else{

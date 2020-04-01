@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import java.sql.DriverManager;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -25,14 +26,18 @@ public class GCUbake extends javax.swing.JFrame {
     /**
      * Creates new form GCUbake
      */
+    //default constructor not used since username value has to be passed
     public GCUbake() {
+        
+        
+    }
+   
+    public GCUbake(String loggedinUser){
+        this.loggedinUser = loggedinUser;
+        System.out.println(loggedinUser);
         initComponents();
         checkLessons();
-        loggedinUser = run.logged_in_customer;
-        System.out.println(loggedinUser);
-        
-        
-       
+    
     }
     
     private void checkLessons(){
@@ -86,8 +91,6 @@ public class GCUbake extends javax.swing.JFrame {
         btnLessonbooked = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
-        jLabel4 = new javax.swing.JLabel();
-        txtUserID = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         txtLesson_on_going = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -97,7 +100,7 @@ public class GCUbake extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableCustomer = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         btnCustomerLogout = new javax.swing.JToggleButton();
@@ -139,49 +142,33 @@ public class GCUbake extends javax.swing.JFrame {
         jTextArea2.setText("Our system updates whenever a new\nlessons is avaiable! You can look \nthrough them by using the drop-down\nmenu. If you would like to book one of the\navailable lessons you need to enter your\nusername.");
         jScrollPane2.setViewportView(jTextArea2);
 
-        jLabel4.setText("Username:");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cmbLessons_available, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                    .addComponent(cmbLessons_available, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnLessonbooked, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(137, 137, 137))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                .addComponent(btnLessonbooked, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(137, 137, 137))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbLessons_available, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUserID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
+                        .addComponent(cmbLessons_available, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
                 .addComponent(btnLessonbooked)
                 .addContainerGap())
         );
@@ -231,7 +218,7 @@ public class GCUbake extends javax.swing.JFrame {
 
         jLabel2.setText("At this page you are able to view your on-going status here at GCUbake");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableCustomer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -242,9 +229,14 @@ public class GCUbake extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable1);
+        jScrollPane3.setViewportView(tableCustomer);
 
         jButton4.setText("Update");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -326,15 +318,15 @@ public class GCUbake extends javax.swing.JFrame {
     private void btnLessonbookedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLessonbookedActionPerformed
         // Buttons for customer to book lessons use username as identifier for the bookings
         try{
-            
-            
+        //
+        System.out.println(loggedinUser);
         run.getConnection();
         conn = run.con;
         
         
         String booking = "INSERT INTO Bookings(customerID, GCU_lesson, GCU_rank)"
                 +"VALUES(?,?,?)";
-        pst.setString(1, txtUserID.getText());
+        pst.setString(1, loggedinUser);
         pst.setString(2,cmbLessons_available.getSelectedItem().toString());
         pst.setString(3, "Beginner");
         pst = conn.prepareStatement(booking);
@@ -360,9 +352,8 @@ public class GCUbake extends javax.swing.JFrame {
         
         catch(Exception e){
         
-        
-        
-        
+            System.err.println(e);
+            
         }
         
     }//GEN-LAST:event_btnLessonbookedActionPerformed
@@ -370,6 +361,35 @@ public class GCUbake extends javax.swing.JFrame {
     private void cmbLessons_availableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLessons_availableActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbLessons_availableActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        
+        run.getConnection();
+        conn = run.con;
+        //method is used to show the customer what progress they have made table:
+        try{
+
+            pst = conn.prepareStatement("SELECT * FROM Bookings where customerID="+loggedinUser+"");
+            ResultSet rs = pst.executeQuery();
+            DefaultTableModel table = (DefaultTableModel)tableCustomer.getModel();
+            table.setRowCount(0);
+
+            while(rs.next()){
+                
+                //adds in the appopriate values into the right class
+                Object o[]={rs.getInt("bookingID"), rs.getString("lessonType"), rs.getString("sessionsRequired")};
+                table.addRow(o);
+
+            }
+
+        }
+
+        catch(Exception e){
+
+            System.err.print(e);
+
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -417,7 +437,6 @@ public class GCUbake extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -426,10 +445,9 @@ public class GCUbake extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTable tableCustomer;
     private javax.swing.JTextField txtLesson_on_going;
-    private javax.swing.JTextField txtUserID;
     // End of variables declaration//GEN-END:variables
 }
