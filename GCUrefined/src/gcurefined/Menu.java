@@ -104,14 +104,17 @@ public class Menu extends javax.swing.JFrame {
             pst.execute();
             
          String createTable2 = "CREATE TABLE IF NOT EXISTS Staff("
-                 + "staffID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(staffID),"
+                 + "staffID INT NOT NULL AUTO_INCREMENT, "
+                 + "PRIMARY KEY(staffID),"
                  + "role TEXT,"
                  + "firstname TEXT,"
                  + "lastname TEXT,"
                  + "contactNo TEXT,"
                  + "email TEXT,"
-                 + "username TEXT,"
-                 + "password TEXT);";
+                 + "username VARCHAR(250),"
+                 + "password TEXT,"
+                 + "UNIQUE(username)"
+                 + ");";
             pst = con.prepareStatement(createTable2);
             pst.execute();
             
@@ -129,7 +132,8 @@ public class Menu extends javax.swing.JFrame {
                  + "PRIMARY KEY(lessonID),"
                  + "Customer VARCHAR(250),"
                  + "lessonType VARCHAR(250),"
-                 + "UNIQUE(lessonType),"
+                 + "lessonDate Varchar(250),"    
+                 + "lessonTime VARCHAR(250),"
                  + "sessionsRequired TEXT,"
                  + "FOREIGN KEY(customer) REFERENCES Customer(username)"
                  + ");";
@@ -142,18 +146,21 @@ public class Menu extends javax.swing.JFrame {
                     + "PRIMARY KEY(bookingID),"
                     + "customerID VARCHAR(250),"
                     + "GCU_lesson VARCHAR(250),"
+                    + "GCU_lesson_date VARCHAR(250),"
+                    + "GCU_lesson_time VARCHAR(250),"
                     + "GCU_rank VARCHAR(250),"
-                    + "FOREIGN KEY(customerID) REFERENCES Customer(username),"
-                    + "FOREIGN KEY(GCU_lesson) REFERENCES Lessons(lessonType));";
+                    + "FOREIGN KEY(customerID) REFERENCES Customer(username)"
+                    +");";
             
             pst = con.prepareStatement(createTable5);
             pst.execute();
-         
-         
-         con.close();
+            
+            con.close();
+            
+            
             }
             catch(Exception e){
-                JOptionPane.showMessageDialog(null, e);
+                JOptionPane.showMessageDialog(null, "Date already set up");
             }
     
     }
@@ -475,19 +482,18 @@ public class Menu extends javax.swing.JFrame {
           //if statement ensures that both passwords entered match
           
            if(regPassword1.getText().equals(regPassword2.getText())){ 
-            String query = "INSERT INTO Customer(customerStatus, title, firstname, lastname, contactNo, email, username, password)" 
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String customerCreate = "INSERT INTO Customer(title, firstname, lastname, contactNo, email, username, password)" 
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
             
-            pst = con.prepareStatement(query);
+            pst = con.prepareStatement(customerCreate);
             
-            pst.setString(1, null);
-            pst.setString(2,cmbReggender.getSelectedItem().toString());
-            pst.setString(3,txtRegfirstname.getText());
-            pst.setString(4,txtReglastname.getText());
-            pst.setString(5,txtRegphone.getText());
-            pst.setString(6,txtRegemail.getText());
-            pst.setString(7,txtRegusername.getText());
-            pst.setString(8,regPassword1.getText());
+            pst.setString(1,cmbReggender.getSelectedItem().toString());
+            pst.setString(2,txtRegfirstname.getText());
+            pst.setString(3,txtReglastname.getText());
+            pst.setString(4,txtRegphone.getText());
+            pst.setString(5,txtRegemail.getText());
+            pst.setString(6,txtRegusername.getText());
+            pst.setString(7,regPassword1.getText());
             pst.execute();
       
             
@@ -568,9 +574,8 @@ public class Menu extends javax.swing.JFrame {
             logged_in_customer = txtLoginuser.getText();
             JOptionPane.showMessageDialog(null, "Login Successfully");
             System.out.println(logged_in_customer);
-            passUsername();
-           
-        }
+            passUsername();   
+            }
         
         else{
             JOptionPane.showMessageDialog(null, "Login failed");

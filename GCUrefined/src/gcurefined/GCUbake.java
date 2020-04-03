@@ -56,10 +56,13 @@ public class GCUbake extends javax.swing.JFrame {
             String lessons = rs.getString("lessonType");
             cmbLessons_available.addItem(lessons);
             
+      
             
-            }
+						
+            
         
         }
+    }
         catch(Exception e){
             System.err.print(e);
         
@@ -89,6 +92,11 @@ public class GCUbake extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         cmbLessons_available = new javax.swing.JComboBox<>();
         btnLessonbooked = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        cmbLessonTimes = new javax.swing.JComboBox<>();
+        btnCheckTimes = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        cmbLessonDates = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
@@ -122,7 +130,7 @@ public class GCUbake extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Lessons available:");
+        jLabel1.setText("Lessons Type:");
 
         cmbLessons_available.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,9 +145,30 @@ public class GCUbake extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Available Times:");
+
+        cmbLessonTimes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "09.00", "10.00", "11.00", "12.00", "13.00", "14.00", "15.00", "16.00", "17.00", "18.00", "19.00", " " }));
+        cmbLessonTimes.setToolTipText("");
+        cmbLessonTimes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbLessonTimesActionPerformed(evt);
+            }
+        });
+
+        btnCheckTimes.setText("Check Dates & Times");
+        btnCheckTimes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckTimesActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Available Dates:");
+
+        cmbLessonDates.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
-        jTextArea2.setText("Our system updates whenever a new\nlessons is avaiable! You can look \nthrough them by using the drop-down\nmenu. If you would like to book one of the\navailable lessons you need to enter your\nusername.");
+        jTextArea2.setText("You look at which types of lessons are available by using the\nDrop-down menu at lessons available. Check the dates and \ntimes to know when you can book the lessons.\n");
         jScrollPane2.setViewportView(jTextArea2);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -147,30 +176,62 @@ public class GCUbake extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmbLessonDates, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmbLessons_available, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(27, Short.MAX_VALUE)
+                        .addComponent(btnCheckTimes, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(38, 38, 38)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbLessons_available, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLessonbooked, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(137, 137, 137))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbLessonTimes, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(btnLessonbooked, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbLessons_available, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
-                .addComponent(btnLessonbooked)
-                .addContainerGap())
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(cmbLessons_available, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCheckTimes)
+                        .addGap(50, 50, 50)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbLessonDates, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(50, 50, 50))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(cmbLessonTimes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
+                .addComponent(btnLessonbooked, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
 
         jTabbedPane1.addTab("Book Lesson", jPanel1);
@@ -190,7 +251,7 @@ public class GCUbake extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 51, Short.MAX_VALUE))
+                .addGap(0, 231, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,7 +270,7 @@ public class GCUbake extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtLesson_on_going, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(18, 18, 18))
         );
@@ -220,13 +281,13 @@ public class GCUbake extends javax.swing.JFrame {
 
         tableCustomer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Lesson", "Date", "Time", "Status"
             }
         ));
         jScrollPane3.setViewportView(tableCustomer);
@@ -244,7 +305,7 @@ public class GCUbake extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
                 .addGap(31, 31, 31))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
@@ -282,12 +343,12 @@ public class GCUbake extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(87, 87, 87)
                 .addComponent(btnCustomerLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addContainerGap(311, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(365, Short.MAX_VALUE)
+                .addContainerGap(391, Short.MAX_VALUE)
                 .addComponent(btnCustomerLogout)
                 .addContainerGap())
         );
@@ -315,53 +376,6 @@ public class GCUbake extends javax.swing.JFrame {
         run.setVisible(true);
     }//GEN-LAST:event_btnCustomerLogoutActionPerformed
 
-    private void btnLessonbookedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLessonbookedActionPerformed
-        // Buttons for customer to book lessons use username as identifier for the bookings
-        try{
-        //
-        System.out.println(loggedinUser);
-        run.getConnection();
-        conn = run.con;
-        
-        
-        String booking = "INSERT INTO Bookings(customerID, GCU_lesson, GCU_rank)"
-                +"VALUES(?,?,?)";
-        pst.setString(1, loggedinUser);
-        pst.setString(2,cmbLessons_available.getSelectedItem().toString());
-        pst.setString(3, "Beginner");
-        pst = conn.prepareStatement(booking);
-        pst.execute();
-        
-        /*
-        used this clause as testint to ensure that values from combobox could be recieved
-        String query1 = "INSERT INTO test(test)"
-                + "values(?);";
-        pst = conn.prepareStatement(query1);
-        
-        txtUserID.getText();
-        pst.setString(1, cmbLessons_available.getSelectedItem().toString());
-        pst.execute();
-        
-        */
-        
-        
-        
-        
-        
-        }
-        
-        catch(Exception e){
-        
-            System.err.println(e);
-            
-        }
-        
-    }//GEN-LAST:event_btnLessonbookedActionPerformed
-
-    private void cmbLessons_availableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLessons_availableActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbLessons_availableActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         
         run.getConnection();
@@ -369,7 +383,7 @@ public class GCUbake extends javax.swing.JFrame {
         //method is used to show the customer what progress they have made table:
         try{
 
-            pst = conn.prepareStatement("SELECT * FROM Bookings where customerID="+loggedinUser+"");
+            pst = conn.prepareStatement("SELECT * FROM Bookings where customerID='"+loggedinUser+"';");
             ResultSet rs = pst.executeQuery();
             DefaultTableModel table = (DefaultTableModel)tableCustomer.getModel();
             table.setRowCount(0);
@@ -377,8 +391,8 @@ public class GCUbake extends javax.swing.JFrame {
             while(rs.next()){
                 
                 //adds in the appopriate values into the right class
-                Object o[]={rs.getInt("bookingID"), rs.getString("lessonType"), rs.getString("sessionsRequired")};
-                table.addRow(o);
+                Object p[]={rs.getInt("bookingID"), rs.getString("GCU_lesson"),rs.getString("GCU_lesson_date"), rs.getString("GCU_lesson_time"), rs.getString("GCU_rank")};
+                table.addRow(p);
 
             }
 
@@ -390,6 +404,85 @@ public class GCUbake extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void btnCheckTimesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckTimesActionPerformed
+        //Checking after available times
+        cmbLessonDates.setSelectedItem(null);
+
+        try{
+            run.getConnection();
+            conn = run.con;
+
+            //retrives the dates where the chefs are available for the lessons selected
+            String queryDates = "SELECT * FROM Lessons where lessonType='"+cmbLessons_available.getSelectedItem().toString()+"'";
+            pst = conn.prepareStatement(queryDates);
+            ResultSet rs = pst.executeQuery();
+
+            while(rs.next()){
+                String dates = rs.getString("lessonDate");
+                cmbLessonDates.addItem(dates);
+
+            }
+            
+        }
+
+        catch(Exception e){
+            System.err.print(e);
+
+        }
+    }//GEN-LAST:event_btnCheckTimesActionPerformed
+
+    private void cmbLessonTimesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLessonTimesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbLessonTimesActionPerformed
+
+    private void btnLessonbookedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLessonbookedActionPerformed
+        // Buttons for customer to book lessons use username as identifier for the bookings
+        try{
+
+            run.getConnection();
+            conn = run.con;
+
+            String booking = "INSERT INTO Bookings(customerID, GCU_lesson, GCU_lesson_date, GCU_lesson_time, GCU_rank)"
+            +"VALUES(?, ?, ?, ?, ?);";
+            pst = conn.prepareStatement(booking);
+            pst.setString(1, loggedinUser);
+            pst.setString(2,cmbLessonTimes.getSelectedItem().toString());
+            pst.setString(3,cmbLessonDates.getSelectedItem().toString());
+            pst.setString(4, cmbLessons_available.getSelectedItem().toString());
+            pst.setString(5, "Beginner");
+            pst.execute();
+            
+            cmbLessonDates.setSelectedItem("");
+
+            JOptionPane.showMessageDialog(null, "Lesssons booked\n");
+            
+            conn.close();
+
+            /*
+            used this clause as testint to ensure that values from combobox could be recieved
+            String query1 = "INSERT INTO test(test)"
+            + "values(?);";
+            pst = conn.prepareStatement(query1);
+
+            txtUserID.getText();
+            pst.setString(1, cmbLessons_available.getSelectedItem().toString());
+            pst.execute();
+
+            */
+
+        }
+
+        catch(Exception e){
+
+            System.err.println(e);
+
+        }
+    }//GEN-LAST:event_btnLessonbookedActionPerformed
+
+    private void cmbLessons_availableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLessons_availableActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbLessons_availableActionPerformed
 
     /**
      * @param args the command line arguments
@@ -427,8 +520,11 @@ public class GCUbake extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCheckTimes;
     private javax.swing.JToggleButton btnCustomerLogout;
     private javax.swing.JButton btnLessonbooked;
+    private javax.swing.JComboBox<String> cmbLessonDates;
+    private javax.swing.JComboBox<String> cmbLessonTimes;
     private javax.swing.JComboBox<String> cmbLessons_available;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
@@ -437,6 +533,8 @@ public class GCUbake extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
