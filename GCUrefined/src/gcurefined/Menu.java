@@ -132,27 +132,15 @@ public class Menu extends javax.swing.JFrame {
                  + "PRIMARY KEY(lessonID),"
                  + "Customer VARCHAR(250),"
                  + "lessonType VARCHAR(250),"
-                 + "lessonDate Varchar(250),"    
                  + "lessonTime VARCHAR(250),"
+                 + "lessonDate VARCHAR(250),"
+                 + "chef TEXT,"
                  + "sessionsRequired TEXT,"
-                 + "FOREIGN KEY(customer) REFERENCES Customer(username)"
+                 + "GCU_status TEXT,"
+                 + "FOREIGN KEY(Customer) REFERENCES Customer(username)"
                  + ");";
             
-         pst = con.prepareStatement(createTable4);
-         pst.execute();
-         
-            String createTable5 = "CREATE TABLE IF NOT EXISTS Bookings("
-                    + "bookingID INT NOT NULL AUTO_INCREMENT,"
-                    + "PRIMARY KEY(bookingID),"
-                    + "customerID VARCHAR(250),"
-                    + "GCU_lesson VARCHAR(250),"
-                    + "GCU_lesson_date VARCHAR(250),"
-                    + "GCU_lesson_time VARCHAR(250),"
-                    + "GCU_rank VARCHAR(250),"
-                    + "FOREIGN KEY(customerID) REFERENCES Customer(username)"
-                    +");";
-            
-            pst = con.prepareStatement(createTable5);
+            pst = con.prepareStatement(createTable4);
             pst.execute();
             
             con.close();
