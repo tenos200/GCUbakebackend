@@ -104,6 +104,7 @@ public class GCUbake extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tableCustomer = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
+        jToggleButton1 = new javax.swing.JToggleButton();
         jPanel4 = new javax.swing.JPanel();
         btnCustomerLogout = new javax.swing.JToggleButton();
 
@@ -235,10 +236,17 @@ public class GCUbake extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tableCustomer);
 
-        jButton4.setText("View ");
+        jButton4.setText("Update");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
+            }
+        });
+
+        jToggleButton1.setText("Cancel lesson");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
             }
         });
 
@@ -253,11 +261,13 @@ public class GCUbake extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
+                        .addGap(97, 97, 97)
                         .addComponent(jLabel2))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(244, 244, 244)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(56, 56, 56)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(97, 97, 97)
+                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -267,9 +277,11 @@ public class GCUbake extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4)
+                    .addComponent(jToggleButton1))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("View Progress", jPanel3);
@@ -399,6 +411,29 @@ public class GCUbake extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbLessons_availableActionPerformed
 
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        //cancel from customer perspective
+        
+        try{
+            
+            String SelectedRow = tableCustomer.getValueAt(tableCustomer.getSelectedRow(), 1).toString();
+            System.out.print(SelectedRow);
+            String cancelled = "cancelled";
+            String query = "UPDATE Lessons set GCU_status = '"+ cancelled +"' where lessonDate ='" + SelectedRow +"';";
+            
+            pst = conn.prepareStatement(query);
+            pst.execute();
+            conn.close();
+            
+        }
+        
+        catch(Exception e){
+            System.err.print(e);
+        
+        
+        }
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -454,6 +489,7 @@ public class GCUbake extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTable tableCustomer;
     private javax.swing.JTextField txtLessonDates;
     // End of variables declaration//GEN-END:variables

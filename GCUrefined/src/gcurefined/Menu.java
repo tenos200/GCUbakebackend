@@ -117,6 +117,7 @@ public class Menu extends javax.swing.JFrame {
                  + ");";
             pst = con.prepareStatement(createTable2);
             pst.execute();
+         
             
          String createTable3 = "CREATE TABLE IF NOT EXISTS Login("
                  + "loginID INT NOT NULL AUTO_INCREMENT, "
