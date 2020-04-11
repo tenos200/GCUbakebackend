@@ -329,8 +329,8 @@ public class GCUbake extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCustomerLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerLogoutActionPerformed
-        this.dispose();
         JOptionPane.showMessageDialog(null, "Logged out");
+        this.dispose();
         Menu run = new Menu();
         run.setVisible(true);
     }//GEN-LAST:event_btnCustomerLogoutActionPerformed

@@ -652,13 +652,13 @@ public class Menu extends javax.swing.JFrame {
 
             if(rs.next()){
                 logged_in_customer = txtLoginuser.getText();
-                JOptionPane.showMessageDialog(null, "Login Successfully");
+                JOptionPane.showMessageDialog(null, "Login Successful");
                 System.out.println(logged_in_customer);
                 passUsername();
             }
 
             else{
-                JOptionPane.showMessageDialog(null, "Login failed");
+                JOptionPane.showMessageDialog(null, "Invalid credentials");
 
             }
         }
