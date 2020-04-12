@@ -20,7 +20,17 @@ public class Menu extends javax.swing.JFrame {
     PreparedStatement pst = null;
     Statement stmt = null;
     ResultSet rs = null;
-    String logged_in_customer;
+    private String logged_in_customer;
+    private String createTable1;
+    private String createTable2;
+    private String createTable3; 
+    private String createTable4;
+    private String query;
+    private String customerCreate;
+    private String database;
+    private String username;
+    private String password;
+    
     
 
     //Creates new form Menu
@@ -38,15 +48,15 @@ public class Menu extends javax.swing.JFrame {
         
         try{
         
-        String database = "jdbc:mysql://127.0.0.1:3306/";
-        String username = "root";
-        String password = "Password";
+        database = "jdbc:mysql://127.0.0.1:3306/";
+        username = "root";
+        password = "Password";
         
         con = DriverManager.getConnection(database, username, password);
         
-        String sql = "CREATE DATABASE IF NOT EXISTS GCUBake";
+        query = "CREATE DATABASE IF NOT EXISTS GCUBake";
         
-        pst = con.prepareStatement(sql);
+        pst = con.prepareStatement(query);
         pst.execute();
         con.close();
         }
@@ -86,7 +96,7 @@ public class Menu extends javax.swing.JFrame {
         try{
             getConnection();
             //A backend method which creates the tables on the specified unit if it does not exist
-           String createTable1 = "CREATE TABLE IF NOT EXISTS Customer("
+           createTable1 = "CREATE TABLE IF NOT EXISTS Customer("
                  + "customerID INT NOT NULL AUTO_INCREMENT, "
                  + "PRIMARY KEY(customerID),"
                  + "title TEXT,"
@@ -102,7 +112,7 @@ public class Menu extends javax.swing.JFrame {
             pst = con.prepareStatement(createTable1);
             pst.execute();
             
-         String createTable2 = "CREATE TABLE IF NOT EXISTS Staff("
+                createTable2 = "CREATE TABLE IF NOT EXISTS Staff("
                  + "staffID INT NOT NULL AUTO_INCREMENT, "
                  + "PRIMARY KEY(staffID),"
                  + "role TEXT,"
@@ -118,7 +128,7 @@ public class Menu extends javax.swing.JFrame {
             pst.execute();
          
             
-         String createTable3 = "CREATE TABLE IF NOT EXISTS Login("
+                createTable3 = "CREATE TABLE IF NOT EXISTS Login("
                  + "loginID INT NOT NULL AUTO_INCREMENT, "
                  + "PRIMARY KEY(loginID),"
                  + "username TEXT,"
@@ -127,7 +137,7 @@ public class Menu extends javax.swing.JFrame {
             pst.execute();
             
             
-             String createTable4 = "CREATE TABLE IF NOT EXISTS Lessons("
+                createTable4 = "CREATE TABLE IF NOT EXISTS Lessons("
                  + "lessonID INT NOT NULL AUTO_INCREMENT, "
                  + "PRIMARY KEY(lessonID),"
                  + "Customer VARCHAR(250),"
@@ -538,7 +548,7 @@ public class Menu extends javax.swing.JFrame {
             getConnection();
             
             
-        String query ="SELECT * FROM Staff Where username='"+txtStaffloginuser.getText()+ "' and password='" +txtStaffloginpass.getText() + "'";
+        query ="SELECT * FROM Staff Where username='"+txtStaffloginuser.getText()+ "' and password='" +txtStaffloginpass.getText() + "'";
         pst=con.prepareStatement(query);
         rs=pst.executeQuery();
         
@@ -589,7 +599,7 @@ public class Menu extends javax.swing.JFrame {
             //if statement ensures that both passwords entered match
 
             if(regPassword1.getText().equals(regPassword2.getText())){
-                String customerCreate = "INSERT INTO Customer(title, firstname, lastname, contactNo, email, username, password)"
+                customerCreate = "INSERT INTO Customer(title, firstname, lastname, contactNo, email, username, password)"
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
                 pst = con.prepareStatement(customerCreate);
@@ -645,7 +655,7 @@ public class Menu extends javax.swing.JFrame {
         try{
             getConnection();
 
-            String query ="SELECT * FROM Login Where username='"+txtLoginuser.getText()+ "' and password='" +txtLoginpass.getText() + "'";
+            query ="SELECT * FROM Login Where username='"+txtLoginuser.getText()+ "' and password='" +txtLoginpass.getText() + "'";
 
             pst=con.prepareStatement(query);
             rs=pst.executeQuery();
