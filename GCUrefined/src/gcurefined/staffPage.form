@@ -57,13 +57,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jButton2" min="-2" pref="160" max="-2" attributes="0"/>
+                              <Component id="update_bookings_" min="-2" pref="160" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                               <Component id="btnOngoing" min="-2" pref="160" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnCompleted" min="-2" pref="160" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                              <Component id="jButton3" min="-2" pref="160" max="-2" attributes="0"/>
+                              <Component id="cancel_booking_" min="-2" pref="160" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane2" min="-2" pref="801" max="-2" attributes="0"/>
                       </Group>
@@ -79,12 +79,12 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jButton2" alignment="3" pref="36" max="32767" attributes="0"/>
+                              <Component id="update_bookings_" alignment="3" pref="36" max="32767" attributes="0"/>
                               <Component id="btnOngoing" alignment="3" pref="36" max="32767" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnCompleted" alignment="3" pref="36" max="32767" attributes="0"/>
-                              <Component id="jButton3" alignment="3" pref="36" max="32767" attributes="0"/>
+                              <Component id="cancel_booking_" alignment="3" pref="36" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -165,12 +165,12 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="jButton2">
+            <Component class="javax.swing.JButton" name="update_bookings_">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Update"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="update_bookings_ActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnOngoing">
@@ -195,7 +195,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCompletedActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton3">
+            <Component class="javax.swing.JButton" name="cancel_booking_">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="38" green="38" red="e4" type="rgb"/>
@@ -203,7 +203,7 @@
                 <Property name="text" type="java.lang.String" value="Cancel"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancel_booking_ActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -248,7 +248,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jButton5" min="-2" pref="228" max="-2" attributes="0"/>
+                              <Component id="create_lesson_" min="-2" pref="228" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnViewtable" min="-2" pref="310" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
@@ -293,9 +293,9 @@
                               </Group>
                           </Group>
                       </Group>
-                      <Group type="103" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnViewtable" alignment="0" min="-2" pref="42" max="-2" attributes="0"/>
-                          <Component id="jButton5" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                          <Component id="create_lesson_" min="-2" pref="42" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="59" max="32767" attributes="0"/>
                   </Group>
@@ -351,12 +351,12 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="jButton5">
+            <Component class="javax.swing.JButton" name="create_lesson_">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Create Lesson"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="create_lesson_ActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnViewtable">
@@ -431,7 +431,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace pref="280" max="32767" attributes="0"/>
-                      <Component id="jButton1" min="-2" pref="275" max="-2" attributes="0"/>
+                      <Component id="loggout_staff_" min="-2" pref="275" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="265" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -440,19 +440,19 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace pref="375" max="32767" attributes="0"/>
-                      <Component id="jButton1" min="-2" pref="48" max="-2" attributes="0"/>
+                      <Component id="loggout_staff_" min="-2" pref="48" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="loggout_staff_">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Logout"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loggout_staff_ActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

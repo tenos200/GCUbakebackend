@@ -178,7 +178,7 @@ public class Menu extends javax.swing.JFrame {
         Booking = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         txtLoginuser = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnLoginin = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtLoginpass = new javax.swing.JPasswordField();
@@ -186,7 +186,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btnRegister = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -245,11 +245,11 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Monaco", 1, 16)); // NOI18N
-        jButton1.setText("Login");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnLoginin.setFont(new java.awt.Font("Monaco", 1, 16)); // NOI18N
+        btnLoginin.setText("Login");
+        btnLoginin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnLogininActionPerformed(evt);
             }
         });
 
@@ -286,7 +286,7 @@ public class Menu extends javax.swing.JFrame {
                                 .addGap(61, 61, 61)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtLoginpass, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnLoginin, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtLoginuser, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(139, 139, 139)
@@ -309,7 +309,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(txtLoginpass, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLoginin, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel13)
@@ -322,10 +322,10 @@ public class Menu extends javax.swing.JFrame {
 
         Booking.addTab("Login", jPanel1);
 
-        jButton2.setText("Register");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnRegister.setText("Register");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnRegisterActionPerformed(evt);
             }
         });
 
@@ -394,7 +394,7 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -449,7 +449,7 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(txtRegemail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -526,7 +526,7 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    public void passUsername(){
+    private void passUsername(){
         /*this method was built to pass the username which was eneterd as a string in order to 
         be able to identify which user was logged in.
         */
@@ -591,7 +591,7 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRegfirstnameActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         //create my mysql database connection
         getConnection();
 
@@ -648,9 +648,9 @@ public class Menu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Username already taken");
         }
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnRegisterActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnLogininActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogininActionPerformed
 
         try{
             getConnection();
@@ -676,7 +676,7 @@ public class Menu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
 
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnLogininActionPerformed
 
     private void txtLoginuserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginuserActionPerformed
         // TODO add your handling code here:
@@ -723,10 +723,10 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane Booking;
+    private javax.swing.JButton btnLoginin;
+    private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnStafflogin;
     private javax.swing.JComboBox<String> cmbRegtitle;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

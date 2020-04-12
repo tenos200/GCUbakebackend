@@ -19,9 +19,19 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class staffPage extends javax.swing.JFrame {
+    Menu run = new Menu();
     PreparedStatement pst = null;
     Connection conn = null;
-    Menu run = new Menu();
+    private String query;
+    private String SelectedRow;
+    private int parse;
+    private String completed = "Star-Baker";
+    private String ongoing = "on-going";
+    private String cancelled = "cancelled";
+    private String queryStarBaker;
+    private String queryCancel;
+    
+    
     
     
 
@@ -82,14 +92,14 @@ public class staffPage extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableStaffbooking = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        update_bookings_ = new javax.swing.JButton();
         btnOngoing = new javax.swing.JButton();
         btnCompleted = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        cancel_booking_ = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableLessons = new javax.swing.JTable();
-        jButton5 = new javax.swing.JButton();
+        create_lesson_ = new javax.swing.JButton();
         btnViewtable = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -98,7 +108,7 @@ public class staffPage extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtLessonChef = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        loggout_staff_ = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,10 +125,10 @@ public class staffPage extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tableStaffbooking);
 
-        jButton2.setText("Update");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        update_bookings_.setText("Update");
+        update_bookings_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                update_bookings_ActionPerformed(evt);
             }
         });
 
@@ -138,11 +148,11 @@ public class staffPage extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(228, 56, 56));
-        jButton3.setText("Cancel");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        cancel_booking_.setBackground(new java.awt.Color(228, 56, 56));
+        cancel_booking_.setText("Cancel");
+        cancel_booking_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                cancel_booking_ActionPerformed(evt);
             }
         });
 
@@ -154,13 +164,13 @@ public class staffPage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(update_bookings_, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(46, 46, 46)
                         .addComponent(btnOngoing, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCompleted, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(53, 53, 53)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cancel_booking_, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 801, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
@@ -172,11 +182,11 @@ public class staffPage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                        .addComponent(update_bookings_, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                         .addComponent(btnOngoing, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnCompleted, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)))
+                        .addComponent(cancel_booking_, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -195,10 +205,10 @@ public class staffPage extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tableLessons);
 
-        jButton5.setText("Create Lesson");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        create_lesson_.setText("Create Lesson");
+        create_lesson_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                create_lesson_ActionPerformed(evt);
             }
         });
 
@@ -253,7 +263,7 @@ public class staffPage extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(create_lesson_, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnViewtable, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(123, 123, 123))))
@@ -285,18 +295,18 @@ public class staffPage extends javax.swing.JFrame {
                                     .addComponent(txtLessonChef, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel1))
                                 .addGap(141, 141, 141)))))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnViewtable, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(create_lesson_, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Create Lessons", jPanel2);
 
-        jButton1.setText("Logout");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        loggout_staff_.setText("Logout");
+        loggout_staff_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                loggout_staff_ActionPerformed(evt);
             }
         });
 
@@ -306,14 +316,14 @@ public class staffPage extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(280, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(loggout_staff_, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(265, 265, 265))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(375, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(loggout_staff_, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
 
@@ -336,13 +346,13 @@ public class staffPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void loggout_staff_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loggout_staff_ActionPerformed
         // TODO add your handling code here:
         this.dispose();
         JOptionPane.showMessageDialog(null, "Logged out");
         Menu goback = new Menu();
         run.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_loggout_staff_ActionPerformed
 
     private void btnViewtableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewtableActionPerformed
 
@@ -372,14 +382,14 @@ public class staffPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnViewtableActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void create_lesson_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_lesson_ActionPerformed
 
         run.getConnection();
         conn = run.con;
 
         try{
 
-            String query = "INSERT INTO Lessons(lessontype, chef, sessionsRequired)"
+            query = "INSERT INTO Lessons(lessontype, chef, sessionsRequired)"
             + "VALUES(?, ?, ?);";
             pst = conn.prepareStatement(query);
             pst.setString(1, txtLessonType.getText());
@@ -398,13 +408,13 @@ public class staffPage extends javax.swing.JFrame {
             System.err.print(e);
 
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_create_lesson_ActionPerformed
 
     private void txtLessonChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLessonChefActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLessonChefActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void cancel_booking_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_booking_ActionPerformed
 
         //cancel button
         run.getConnection();
@@ -412,11 +422,10 @@ public class staffPage extends javax.swing.JFrame {
 
         try{
 
-            String SelectedRow = tableStaffbooking.getValueAt(tableStaffbooking.getSelectedRow(), 0).toString();
-            int n = Integer.parseInt(SelectedRow);
+            SelectedRow = tableStaffbooking.getValueAt(tableStaffbooking.getSelectedRow(), 0).toString();
+            parse = Integer.parseInt(SelectedRow);
             System.out.print(SelectedRow);
-            String cancelled = "cancelled";
-            String queryCancel = "UPDATE Lessons set GCU_status = '"+ cancelled +"' where lessonID = "+ n + ";";
+            queryCancel = "UPDATE Lessons set GCU_status = '"+ cancelled +"' where lessonID = "+ parse + ";";
 
             pst = conn.prepareStatement(queryCancel);
             pst.execute();
@@ -428,7 +437,7 @@ public class staffPage extends javax.swing.JFrame {
             System.err.print(e);
 
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_cancel_booking_ActionPerformed
 
     private void btnCompletedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompletedActionPerformed
 
@@ -438,11 +447,11 @@ public class staffPage extends javax.swing.JFrame {
 
         try{
 
-            String SelectedRow = tableStaffbooking.getValueAt(tableStaffbooking.getSelectedRow(), 0).toString();
+            SelectedRow = tableStaffbooking.getValueAt(tableStaffbooking.getSelectedRow(), 0).toString();
             System.out.print(SelectedRow);
             int j = Integer.parseInt(SelectedRow);
-            String completed = "Star-Baker";
-            String queryStarBaker = "UPDATE Lessons set GCU_status ='"+ completed +"' where lessonID =" + j + ";";
+            completed = "Star-Baker";
+            queryStarBaker = "UPDATE Lessons set GCU_status ='"+ completed +"' where lessonID =" + j + ";";
 
             pst = conn.prepareStatement(queryStarBaker);
             pst.execute();
@@ -463,12 +472,12 @@ public class staffPage extends javax.swing.JFrame {
         conn = run.con;
 
         try{
-            String SelectedRow = tableStaffbooking.getValueAt(tableStaffbooking.getSelectedRow(), 0).toString();
+            SelectedRow = tableStaffbooking.getValueAt(tableStaffbooking.getSelectedRow(), 0).toString();
             int i = Integer.parseInt(SelectedRow);
-            String ongoing = "on-going";
-            String queryOngoing = "UPDATE Lessons set GCU_status = '"+ ongoing +"' where LessonID =" + i +";";
+            
+            query = "UPDATE Lessons set GCU_status = '"+ ongoing +"' where LessonID =" + i +";";
 
-            pst = conn.prepareStatement(queryOngoing);
+            pst = conn.prepareStatement(query);
             pst.execute();
             conn.close();
 
@@ -482,7 +491,7 @@ public class staffPage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnOngoingActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void update_bookings_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_bookings_ActionPerformed
         //view all bookings done by customers
 
         run.getConnection();
@@ -512,7 +521,7 @@ public class staffPage extends javax.swing.JFrame {
             System.err.print(e);
 
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_update_bookings_ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -553,11 +562,9 @@ public class staffPage extends javax.swing.JFrame {
     private javax.swing.JButton btnCompleted;
     private javax.swing.JButton btnOngoing;
     private javax.swing.JButton btnViewtable;
+    private javax.swing.JButton cancel_booking_;
     private javax.swing.JComboBox<String> cmbSessionsRequired;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton create_lesson_;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -567,9 +574,11 @@ public class staffPage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JButton loggout_staff_;
     private javax.swing.JTable tableLessons;
     private javax.swing.JTable tableStaffbooking;
     private javax.swing.JTextField txtLessonChef;
     private javax.swing.JTextField txtLessonType;
+    private javax.swing.JButton update_bookings_;
     // End of variables declaration//GEN-END:variables
 }

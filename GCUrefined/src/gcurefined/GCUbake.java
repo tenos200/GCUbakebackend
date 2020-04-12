@@ -21,7 +21,13 @@ public class GCUbake extends javax.swing.JFrame {
     PreparedStatement pst = null;
     Connection conn = null;
     Menu run = new Menu();
-    String loggedinUser;
+    private String loggedinUser;
+    private String startString;
+    private String booking;
+    private String SelectedRow;
+    private String cancelled;
+    private String query;
+    
 
     /**
      * Creates new form GCUbake
@@ -44,7 +50,7 @@ public class GCUbake extends javax.swing.JFrame {
         
     try{
         
-        //retrieves the lessons that are available from the lessons table so that the user can book it.
+            //retrieves the lessons that are available from the lessons table so that the user can book it.
             run.getConnection();
             conn = run.con;
             
@@ -103,7 +109,7 @@ public class GCUbake extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tableCustomer = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        btncancel_lesson = new javax.swing.JToggleButton();
         jPanel4 = new javax.swing.JPanel();
         btnCustomerLogout = new javax.swing.JToggleButton();
 
@@ -244,10 +250,10 @@ public class GCUbake extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton1.setText("Cancel lesson");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        btncancel_lesson.setText("Cancel lesson");
+        btncancel_lesson.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                btncancel_lessonActionPerformed(evt);
             }
         });
 
@@ -265,7 +271,7 @@ public class GCUbake extends javax.swing.JFrame {
                         .addGap(56, 56, 56)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(97, 97, 97)
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btncancel_lesson, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(113, 113, 113)
                         .addComponent(jLabel2)))
@@ -281,7 +287,7 @@ public class GCUbake extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
+                    .addComponent(btncancel_lesson, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -374,9 +380,9 @@ public class GCUbake extends javax.swing.JFrame {
 
             run.getConnection();
             conn = run.con;
-            String startString = "beginner";
+            startString = "beginner";
 
-            String booking = "UPDATE Lessons SET Customer='"+loggedinUser+"',lessonDate ='"+txtLessonDates.getText() +"',lessonTime ='"+ cmbLessonTimes.getSelectedItem().toString()+ "',GCU_status='"+ startString +
+            booking = "UPDATE Lessons SET Customer='"+loggedinUser+"',lessonDate ='"+txtLessonDates.getText() +"',lessonTime ='"+ cmbLessonTimes.getSelectedItem().toString()+ "',GCU_status='"+ startString +
             "' where lessonType='"+cmbLessons_available.getSelectedItem().toString()+"';";
 
             pst = conn.prepareStatement(booking);
@@ -387,18 +393,6 @@ public class GCUbake extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Lesssons booked\n");
 
             conn.close();
-
-            /*
-            used this clause as testint to ensure that values from combobox could be recieved
-            String query1 = "INSERT INTO test(test)"
-            + "values(?);";
-            pst = conn.prepareStatement(query1);
-
-            txtUserID.getText();
-            pst.setString(1, cmbLessons_available.getSelectedItem().toString());
-            pst.execute();
-
-            */
 
         }
 
@@ -413,15 +407,15 @@ public class GCUbake extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbLessons_availableActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void btncancel_lessonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancel_lessonActionPerformed
         //cancel from customer perspective
         
         try{
             
-            String SelectedRow = tableCustomer.getValueAt(tableCustomer.getSelectedRow(), 1).toString();
+            SelectedRow = tableCustomer.getValueAt(tableCustomer.getSelectedRow(), 1).toString();
             System.out.print(SelectedRow);
-            String cancelled = "cancelled";
-            String query = "UPDATE Lessons set GCU_status = '"+ cancelled +"' where lessonDate ='" + SelectedRow +"';";
+            cancelled = "cancelled";
+            query = "UPDATE Lessons set GCU_status = '"+ cancelled +"' where lessonDate ='" + SelectedRow +"';";
             
             pst = conn.prepareStatement(query);
             pst.execute();
@@ -435,7 +429,7 @@ public class GCUbake extends javax.swing.JFrame {
         
         
         }
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_btncancel_lessonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -475,6 +469,7 @@ public class GCUbake extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnCustomerLogout;
     private javax.swing.JButton btnLessonbooked;
+    private javax.swing.JToggleButton btncancel_lesson;
     private javax.swing.JComboBox<String> cmbLessonTimes;
     private javax.swing.JComboBox<String> cmbLessons_available;
     private javax.swing.JButton jButton1;
@@ -491,7 +486,6 @@ public class GCUbake extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTable tableCustomer;
     private javax.swing.JTextField txtLessonDates;
     // End of variables declaration//GEN-END:variables
