@@ -206,6 +206,8 @@ public class GCUbake extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTabbedPane1.setFont(new java.awt.Font("Menlo", 1, 18)); // NOI18N
+
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
         jLabel1.setText("Lessons available:");
 
@@ -367,7 +369,7 @@ public class GCUbake extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("View Progress", jPanel3);
+        jTabbedPane1.addTab("Progress", jPanel3);
 
         btnCustomerLogout.setFont(new java.awt.Font("Menlo", 0, 18)); // NOI18N
         btnCustomerLogout.setText("Logout");

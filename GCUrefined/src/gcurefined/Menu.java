@@ -365,6 +365,7 @@ public class Menu extends javax.swing.JFrame {
         setBackground(new java.awt.Color(102, 102, 102));
 
         Booking.setBackground(new java.awt.Color(102, 102, 102));
+        Booking.setFont(new java.awt.Font("Menlo", 1, 18)); // NOI18N
 
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -577,8 +578,8 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(txtRegemail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
-                .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
