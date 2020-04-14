@@ -41,9 +41,8 @@ public class staffPage extends javax.swing.JFrame {
         checkBookings();
        
         
-        
-        
     }
+   
     
     private void checkBookings(){
             
@@ -67,17 +66,143 @@ public class staffPage extends javax.swing.JFrame {
                 }
             
             conn.close();
+        }
+        catch(Exception e){
+
+            System.err.print(e);
+
+        }   
+    }
+    
+    
+    private void createLesson(){
+    run.getConnection();
+        conn = run.con;
+
+        try{
+
+            query = "INSERT INTO Lessons(lessontype, chef, sessionsRequired)"
+            + "VALUES(?, ?, ?);";
+            pst = conn.prepareStatement(query);
+            pst.setString(1, txtLessonType.getText());
+            pst.setString(2, txtLessonChef.getText());
+            pst.setString(3, cmbSessionsRequired.getSelectedItem().toString());
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "LessonType: " + txtLessonType.getText()+ "\nChef:" + txtLessonChef.getText() 
+                    + "\nSessions required:"+ cmbSessionsRequired.getSelectedItem().toString()+ "\nRegistered");
+            txtLessonType.setText("");
+            txtLessonChef.setText("");
+            
 
         }
-        
+
+        catch(Exception e){
+            System.err.print(e);
+
+        }
+    }
+    
+    private void viewCreatedlessons(){
+        run.getConnection();
+        conn = run.con;
+        //method is used to show what entries are made in the Lesson table:
+        try{
+
+            pst = conn.prepareStatement("SELECT * FROM Lessons");
+            ResultSet rs = pst.executeQuery();
+            DefaultTableModel table = (DefaultTableModel)tableLessons.getModel();
+            table.setRowCount(0);
+
+            while(rs.next()){
+
+                Object viewTable[]={rs.getInt("LessonID"), rs.getString("lessonType"), rs.getString("chef"), rs.getString("sessionsRequired")};
+                table.addRow(viewTable);
+
+            }
+
+        }
 
         catch(Exception e){
 
             System.err.print(e);
 
         }
-        
+        }
+    
+    private void setOngoingStatus(){
+    //sets the status of the customers to on-going
+        run.getConnection();
+        conn = run.con;
+
+        try{
+            SelectedRow = tableStaffbooking.getValueAt(tableStaffbooking.getSelectedRow(), 0).toString();
+            int i = Integer.parseInt(SelectedRow);
+            
+            query = "UPDATE Lessons set GCU_status = '"+ ongoing +"' where LessonID =" + i +";";
+
+            pst = conn.prepareStatement(query);
+            pst.execute();
+            conn.close();
+
+        }
+
+        catch(Exception e){
+
+            System.err.print(e);
+
+        }
     }
+    
+    private void setCompleteStatus(){
+        
+        // start baker button, sets the customer status in a database to star-baker
+        run.getConnection();
+        conn = run.con;
+
+        try{
+
+            SelectedRow = tableStaffbooking.getValueAt(tableStaffbooking.getSelectedRow(), 0).toString();
+            System.out.print(SelectedRow);
+            int j = Integer.parseInt(SelectedRow);
+            completed = "Star-Baker";
+            queryStarBaker = "UPDATE Lessons set GCU_status ='"+ completed +"' where lessonID =" + j + ";";
+
+            pst = conn.prepareStatement(queryStarBaker);
+            pst.execute();
+            conn.close();
+
+        }
+
+        catch(Exception e){
+            System.err.print(e);
+
+        }
+    }
+    
+    private void setCancelStatus(){
+        
+        //cancel button
+        run.getConnection();
+        conn = run.con;
+
+        try{
+
+            SelectedRow = tableStaffbooking.getValueAt(tableStaffbooking.getSelectedRow(), 0).toString();
+            parse = Integer.parseInt(SelectedRow);
+            System.out.print(SelectedRow);
+            queryCancel = "UPDATE Lessons set GCU_status = '"+ cancelled +"' where lessonID = "+ parse + ";";
+
+            pst = conn.prepareStatement(queryCancel);
+            pst.execute();
+            conn.close();
+
+        }
+
+        catch(Exception e){
+            System.err.print(e);
+
+        }
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -100,7 +225,6 @@ public class staffPage extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableLessons = new javax.swing.JTable();
         create_lesson_ = new javax.swing.JButton();
-        btnViewtable = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtLessonType = new javax.swing.JTextField();
@@ -212,13 +336,6 @@ public class staffPage extends javax.swing.JFrame {
             }
         });
 
-        btnViewtable.setText("View created lessons");
-        btnViewtable.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewtableActionPerformed(evt);
-            }
-        });
-
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
         jLabel5.setText("Lesson Type: ");
 
@@ -243,30 +360,27 @@ public class staffPage extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtLessonChef, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(cmbSessionsRequired, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtLessonType, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(create_lesson_, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnViewtable, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(123, 123, 123))))
+                        .addComponent(txtLessonChef, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cmbSessionsRequired, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtLessonType, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(131, 131, 131)
+                .addComponent(create_lesson_, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,11 +391,11 @@ public class staffPage extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 20, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtLessonType, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(129, 129, 129)
@@ -295,10 +409,9 @@ public class staffPage extends javax.swing.JFrame {
                                     .addComponent(txtLessonChef, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel1))
                                 .addGap(141, 141, 141)))))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnViewtable, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(create_lesson_, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addComponent(create_lesson_, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
         );
 
         jTabbedPane1.addTab("Create Lessons", jPanel2);
@@ -354,60 +467,10 @@ public class staffPage extends javax.swing.JFrame {
         run.setVisible(true);
     }//GEN-LAST:event_loggout_staff_ActionPerformed
 
-    private void btnViewtableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewtableActionPerformed
-
-        run.getConnection();
-        conn = run.con;
-        //method is used to show what entries are made in the Lesson table:
-        try{
-
-            pst = conn.prepareStatement("SELECT * FROM Lessons");
-            ResultSet rs = pst.executeQuery();
-            DefaultTableModel table = (DefaultTableModel)tableLessons.getModel();
-            table.setRowCount(0);
-
-            while(rs.next()){
-
-                Object viewTable[]={rs.getInt("LessonID"), rs.getString("lessonType"), rs.getString("chef"), rs.getString("sessionsRequired")};
-                table.addRow(viewTable);
-
-            }
-
-        }
-
-        catch(Exception e){
-
-            System.err.print(e);
-
-        }
-    }//GEN-LAST:event_btnViewtableActionPerformed
-
     private void create_lesson_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_lesson_ActionPerformed
-
-        run.getConnection();
-        conn = run.con;
-
-        try{
-
-            query = "INSERT INTO Lessons(lessontype, chef, sessionsRequired)"
-            + "VALUES(?, ?, ?);";
-            pst = conn.prepareStatement(query);
-            pst.setString(1, txtLessonType.getText());
-            pst.setString(2, txtLessonChef.getText());
-            pst.setString(3, cmbSessionsRequired.getSelectedItem().toString());
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "LessonType: " + txtLessonType.getText()+ "\nChef:" + txtLessonChef.getText() 
-                    + "\nSessions required:"+ cmbSessionsRequired.getSelectedItem().toString()+ "\nRegistered");
-            txtLessonType.setText("");
-            txtLessonChef.setText("");
-            
-
-        }
-
-        catch(Exception e){
-            System.err.print(e);
-
-        }
+        //creates the lesson and then updates the j table when the button create lesson is clicked
+        createLesson();
+        viewCreatedlessons();
     }//GEN-LAST:event_create_lesson_ActionPerformed
 
     private void txtLessonChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLessonChefActionPerformed
@@ -417,110 +480,26 @@ public class staffPage extends javax.swing.JFrame {
     private void cancel_booking_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_booking_ActionPerformed
 
         //cancel button
-        run.getConnection();
-        conn = run.con;
-
-        try{
-
-            SelectedRow = tableStaffbooking.getValueAt(tableStaffbooking.getSelectedRow(), 0).toString();
-            parse = Integer.parseInt(SelectedRow);
-            System.out.print(SelectedRow);
-            queryCancel = "UPDATE Lessons set GCU_status = '"+ cancelled +"' where lessonID = "+ parse + ";";
-
-            pst = conn.prepareStatement(queryCancel);
-            pst.execute();
-            conn.close();
-
-        }
-
-        catch(Exception e){
-            System.err.print(e);
-
-        }
+        setCancelStatus();
+        
     }//GEN-LAST:event_cancel_booking_ActionPerformed
 
     private void btnCompletedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompletedActionPerformed
 
         // start baker button
-        run.getConnection();
-        conn = run.con;
-
-        try{
-
-            SelectedRow = tableStaffbooking.getValueAt(tableStaffbooking.getSelectedRow(), 0).toString();
-            System.out.print(SelectedRow);
-            int j = Integer.parseInt(SelectedRow);
-            completed = "Star-Baker";
-            queryStarBaker = "UPDATE Lessons set GCU_status ='"+ completed +"' where lessonID =" + j + ";";
-
-            pst = conn.prepareStatement(queryStarBaker);
-            pst.execute();
-            conn.close();
-
-        }
-
-        catch(Exception e){
-            System.err.print(e);
-
-        }
+        setCompleteStatus();
     }//GEN-LAST:event_btnCompletedActionPerformed
 
     private void btnOngoingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOngoingActionPerformed
 
         //sets the status to on-going
-        run.getConnection();
-        conn = run.con;
-
-        try{
-            SelectedRow = tableStaffbooking.getValueAt(tableStaffbooking.getSelectedRow(), 0).toString();
-            int i = Integer.parseInt(SelectedRow);
-            
-            query = "UPDATE Lessons set GCU_status = '"+ ongoing +"' where LessonID =" + i +";";
-
-            pst = conn.prepareStatement(query);
-            pst.execute();
-            conn.close();
-
-        }
-
-        catch(Exception e){
-
-            System.err.print(e);
-
-        }
+        setOngoingStatus();
 
     }//GEN-LAST:event_btnOngoingActionPerformed
 
     private void update_bookings_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_bookings_ActionPerformed
         //view all bookings done by customers
-
-        run.getConnection();
-        conn = run.con;
-
-        try{
-
-            pst = conn.prepareStatement("SELECT * FROM Lessons;");
-            ResultSet rs = pst.executeQuery();
-            DefaultTableModel table = (DefaultTableModel)tableStaffbooking.getModel();
-            table.setRowCount(0);
-
-            while(rs.next()){
-
-                //adds in the appopriate values into the right class
-                Object bookings[]={rs.getInt("lessonID"),rs.getString("Customer"),rs.getString("lessonType"), rs.getString("lessonTime"),rs.getString("lessonDate"), rs.getString("chef"), rs.getString("sessionsRequired"), rs.getString("GCU_status")};
-                table.addRow(bookings);
-
-            }
-
-            conn.close();
-
-        }
-
-        catch(Exception e){
-
-            System.err.print(e);
-
-        }
+        checkBookings();
     }//GEN-LAST:event_update_bookings_ActionPerformed
 
     /**
@@ -561,7 +540,6 @@ public class staffPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCompleted;
     private javax.swing.JButton btnOngoing;
-    private javax.swing.JButton btnViewtable;
     private javax.swing.JButton cancel_booking_;
     private javax.swing.JComboBox<String> cmbSessionsRequired;
     private javax.swing.JButton create_lesson_;

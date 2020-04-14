@@ -162,6 +162,135 @@ public class Menu extends javax.swing.JFrame {
             }
     
     }
+    
+    private void passUsername(){
+        /*this method was built to pass the username which was eneterd as a string in order to 
+        be able to identify which user was logged in.
+        */
+        
+        logged_in_customer = txtLoginuser.getText();
+        GCUbake test = new GCUbake(logged_in_customer);
+        this.dispose();
+        test.setVisible(true);
+    }
+    
+    private void staffLoggin(){
+        try{
+            getConnection();
+            
+            
+        query ="SELECT * FROM Staff Where username='"+txtStaffloginuser.getText()+ "' and password='" +txtStaffloginpass.getText() + "'";
+        pst=con.prepareStatement(query);
+        rs=pst.executeQuery();
+        
+        
+        if(rs.next()){
+            JOptionPane.showMessageDialog(null, "Logged in as staff");
+            this.dispose();
+            staffPage run = new staffPage();
+            run.setVisible(true);
+            
+            
+        }
+        
+        else{
+            JOptionPane.showMessageDialog(null, "Invalid credentials");
+            
+            
+            }                                        
+        } 
+        catch(Exception e){
+        JOptionPane.showMessageDialog(null, e);        
+        }
+    }
+    
+    private void registerCustomer(){
+    //create my mysql database connection
+        getConnection();
+
+        try{
+            //if statement ensures that both passwords entered match
+
+            if(regPassword1.getText().equals(regPassword2.getText())){
+                customerCreate = "INSERT INTO Customer(title, firstname, lastname, contactNo, email, username, password)"
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+                pst = con.prepareStatement(customerCreate);
+
+                pst.setString(1,cmbRegtitle.getSelectedItem().toString());
+                pst.setString(2,txtRegfirstname.getText());
+                pst.setString(3,txtReglastname.getText());
+                pst.setString(4,txtRegphone.getText());
+                pst.setString(5,txtRegemail.getText());
+                pst.setString(6,txtRegusername.getText());
+                pst.setString(7,regPassword1.getText());
+                pst.execute();
+
+                String query2 = "INSERT INTO Login(username, password)" + "VALUES (?, ?)";
+                pst = con.prepareStatement(query2);
+                pst.setString(1,txtRegusername.getText());
+                pst.setString(2,regPassword1.getText());
+                pst.execute();
+                con.close();
+                JOptionPane.showMessageDialog(null, "Registration completed!");
+
+                txtRegfirstname.setText("");
+                txtReglastname.setText("");
+                txtRegphone.setText("");
+                txtRegemail.setText("");
+                txtRegusername.setText("");
+                regPassword1.setText("");
+                regPassword2.setText("");
+                this.dispose();
+                logged_in_customer = txtRegusername.getText();
+                passUsername();
+                
+            }
+
+            else{
+
+                JOptionPane.showMessageDialog(null, "Passwords do not match");
+
+            }
+        }
+
+        catch (Exception e){
+
+            System.err.println("Got an exception");
+            System.err.println(e.getMessage());
+            /*added statement here since I could not figure out a way to print specific
+            error when uniquness constraint was met on username column in customer table
+            */
+            JOptionPane.showMessageDialog(null, "Username already taken");
+        }
+    }
+    
+    private void customerLoggin(){
+    
+        try{
+            getConnection();
+
+            query ="SELECT * FROM Login Where username='"+txtLoginuser.getText()+ "' and password='" +txtLoginpass.getText() + "'";
+
+            pst=con.prepareStatement(query);
+            rs=pst.executeQuery();
+
+            if(rs.next()){
+                logged_in_customer = txtLoginuser.getText();
+                JOptionPane.showMessageDialog(null, "Login Successful");
+                System.out.println(logged_in_customer);
+                passUsername();
+            }
+
+            else{
+                JOptionPane.showMessageDialog(null, "Invalid credentials");
+
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -525,54 +654,11 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    private void passUsername(){
-        /*this method was built to pass the username which was eneterd as a string in order to 
-        be able to identify which user was logged in.
-        */
-        
-        logged_in_customer = txtLoginuser.getText();
-        GCUbake test = new GCUbake(logged_in_customer);
-        this.dispose();
-        test.setVisible(true);
-        
-        
-        
-        
-    }
        
     
     private void btnStaffloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStaffloginActionPerformed
+        staffLoggin();
         
-        try{
-            getConnection();
-            
-            
-        query ="SELECT * FROM Staff Where username='"+txtStaffloginuser.getText()+ "' and password='" +txtStaffloginpass.getText() + "'";
-        pst=con.prepareStatement(query);
-        rs=pst.executeQuery();
-        
-        
-        if(rs.next()){
-            JOptionPane.showMessageDialog(null, "Logged in as staff");
-            this.dispose();
-            staffPage run = new staffPage();
-            run.setVisible(true);
-            
-            
-        }
-        
-        else{
-            JOptionPane.showMessageDialog(null, "Invalid credentials");
-            
-            
-            }                                        
-        } 
-    catch(Exception e){
-        JOptionPane.showMessageDialog(null, e);
-            
-            
-        }
     }//GEN-LAST:event_btnStaffloginActionPerformed
 
     private void regPassword1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regPassword1ActionPerformed
@@ -592,90 +678,13 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_txtRegfirstnameActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        //create my mysql database connection
-        getConnection();
-
-        try{
-            //if statement ensures that both passwords entered match
-
-            if(regPassword1.getText().equals(regPassword2.getText())){
-                customerCreate = "INSERT INTO Customer(title, firstname, lastname, contactNo, email, username, password)"
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-                pst = con.prepareStatement(customerCreate);
-
-                pst.setString(1,cmbRegtitle.getSelectedItem().toString());
-                pst.setString(2,txtRegfirstname.getText());
-                pst.setString(3,txtReglastname.getText());
-                pst.setString(4,txtRegphone.getText());
-                pst.setString(5,txtRegemail.getText());
-                pst.setString(6,txtRegusername.getText());
-                pst.setString(7,regPassword1.getText());
-                pst.execute();
-
-                String query2 = "INSERT INTO Login(username, password)" + "VALUES (?, ?)";
-                pst = con.prepareStatement(query2);
-                pst.setString(1,txtRegusername.getText());
-                pst.setString(2,regPassword1.getText());
-                pst.execute();
-                con.close();
-                JOptionPane.showMessageDialog(null, "Registration completed!");
-
-                txtRegfirstname.setText("");
-                txtReglastname.setText("");
-                txtRegphone.setText("");
-                txtRegemail.setText("");
-                txtRegusername.setText("");
-                regPassword1.setText("");
-                regPassword2.setText("");
-
-            }
-
-            else{
-
-                JOptionPane.showMessageDialog(null, "Passwords do not match");
-
-            }
-        }
-
-        catch (Exception e){
-
-            System.err.println("Got an exception");
-            System.err.println(e.getMessage());
-            /*added statement here since I could not figure out a way to print specific
-            error when uniquness constraint was met on username column in customer table
-            */
-            JOptionPane.showMessageDialog(null, "Username already taken");
-        }
+        registerCustomer();
 
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnLogininActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogininActionPerformed
 
-        try{
-            getConnection();
-
-            query ="SELECT * FROM Login Where username='"+txtLoginuser.getText()+ "' and password='" +txtLoginpass.getText() + "'";
-
-            pst=con.prepareStatement(query);
-            rs=pst.executeQuery();
-
-            if(rs.next()){
-                logged_in_customer = txtLoginuser.getText();
-                JOptionPane.showMessageDialog(null, "Login Successful");
-                System.out.println(logged_in_customer);
-                passUsername();
-            }
-
-            else{
-                JOptionPane.showMessageDialog(null, "Invalid credentials");
-
-            }
-        }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-
-        }
+        customerLoggin();
     }//GEN-LAST:event_btnLogininActionPerformed
 
     private void txtLoginuserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginuserActionPerformed

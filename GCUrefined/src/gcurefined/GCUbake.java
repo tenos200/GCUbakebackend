@@ -43,14 +43,100 @@ public class GCUbake extends javax.swing.JFrame {
         System.out.println(loggedinUser);
         initComponents();
         checkLessons();
+        updateviewProgressTable();
     
     }
+    private void booklesson(){
+        try{
+
+            run.getConnection();
+            conn = run.con;
+            startString = "beginner";
+
+            booking = "UPDATE Lessons SET Customer='"+loggedinUser+"',lessonDate ='"+txtLessonDates.getText() +"',lessonTime ='"+ cmbLessonTimes.getSelectedItem().toString()+ "',GCU_status='"+ startString +
+            "' where lessonType='"+cmbLessons_available.getSelectedItem().toString()+"';";
+
+            pst = conn.prepareStatement(booking);
+            pst.execute();
+
+            txtLessonDates.setText("");
+
+            JOptionPane.showMessageDialog(null, "Lesssons booked\n");
+            updateviewProgressTable();
+            conn.close();
+
+        }
+
+        catch(Exception e){
+
+            System.err.println(e);
+
+        }
+    }
+    
+    
+    private void updateviewProgressTable(){
+        //retreives the appropriate values from the database when a lesson is booked an updates the Jtable in the viewProgress pane
+        run.getConnection();
+        conn = run.con;
+        try{
+
+            pst = conn.prepareStatement("SELECT * FROM Lessons where Customer='"+loggedinUser+"';");
+            ResultSet rs = pst.executeQuery();
+            DefaultTableModel table = (DefaultTableModel)tableCustomer.getModel();
+            table.setRowCount(0);
+
+            while(rs.next()){
+
+                //adds in the appopriate values into the right column in tablemodel
+                Object userBookings[]={rs.getInt("lessonID"), rs.getString("lessonType"), rs.getString("lessonDate"), rs.getString("lessonTime"), rs.getString("chef"), rs.getString("GCU_status")};
+                table.addRow(userBookings);
+
+            }
+
+        }
+
+        catch(Exception e){
+
+            System.err.print(e);
+
+        }
+    }
+   
+    private void cancelLessoncustomer(){
+         /* This method is used for the cancel button in the view progress pane, 
+    it allows a user to cancel the lesson and updates right after that to display the value
+    */
+      
+        run.getConnection();
+        conn = run.con;
+        try{
+            
+            SelectedRow = tableCustomer.getValueAt(tableCustomer.getSelectedRow(), 0).toString();
+            cancelled = "cancelled";
+            query = "UPDATE Lessons set GCU_status = '"+ cancelled +"' where lessonID ='" + SelectedRow +"';";
+            
+            pst = conn.prepareStatement(query);
+            pst.execute();
+            conn.close();
+            JOptionPane.showMessageDialog(null, "Lesson cancelled");
+            updateviewProgressTable();
+            
+        }
+        
+        catch(Exception e){
+            System.err.print(e);
+        
+        
+        }
+        }
+    
     
     private void checkLessons(){
         
-    try{
+        try{
         
-            //retrieves the lessons that are available from the lessons table so that the user can book it.
+            //retrieves the lessons that are available from the lessons table in the database and displays it for user in combobox.
             run.getConnection();
             conn = run.con;
             
@@ -62,25 +148,15 @@ public class GCUbake extends javax.swing.JFrame {
             String lessons = rs.getString("lessonType");
             cmbLessons_available.addItem(lessons);
             
-      
-            
-						
-            
+            }
+            }
         
-        }
-    }
         catch(Exception e){
             System.err.print(e);
         
-        
-        
-        
         }
-    
-    
-    
-    
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -108,7 +184,7 @@ public class GCUbake extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tableCustomer = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
+        btnUpdateprogress = new javax.swing.JButton();
         btncancel_lesson = new javax.swing.JToggleButton();
         jPanel4 = new javax.swing.JPanel();
         btnCustomerLogout = new javax.swing.JToggleButton();
@@ -232,21 +308,21 @@ public class GCUbake extends javax.swing.JFrame {
 
         tableCustomer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Lesson", "Date", "Time", "Chef", "Status"
+                "LessonID", "Lesson", "Date", "Time", "Chef", "Status"
             }
         ));
         jScrollPane3.setViewportView(tableCustomer);
 
-        jButton4.setText("Update");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdateprogress.setText("Update");
+        btnUpdateprogress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnUpdateprogressActionPerformed(evt);
             }
         });
 
@@ -269,7 +345,7 @@ public class GCUbake extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(56, 56, 56)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnUpdateprogress, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(97, 97, 97)
                         .addComponent(btncancel_lesson, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -286,7 +362,7 @@ public class GCUbake extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(btnUpdateprogress, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                     .addComponent(btncancel_lesson, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -341,66 +417,18 @@ public class GCUbake extends javax.swing.JFrame {
         run.setVisible(true);
     }//GEN-LAST:event_btnCustomerLogoutActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnUpdateprogressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateprogressActionPerformed
 
-        run.getConnection();
-        conn = run.con;
-        //method is used to show the customer what progress they have made table:
-        try{
-
-            pst = conn.prepareStatement("SELECT * FROM Lessons where Customer='"+loggedinUser+"';");
-            ResultSet rs = pst.executeQuery();
-            DefaultTableModel table = (DefaultTableModel)tableCustomer.getModel();
-            table.setRowCount(0);
-
-            while(rs.next()){
-
-                //adds in the appopriate values into the right column in tablemodel
-                Object userBookings[]={rs.getString("lessonType"),rs.getString("lessonDate"), rs.getString("lessonTime"), rs.getString("chef"), rs.getString("GCU_status")};
-                table.addRow(userBookings);
-
-            }
-
-        }
-
-        catch(Exception e){
-
-            System.err.print(e);
-
-        }
-    }//GEN-LAST:event_jButton4ActionPerformed
+        updateviewProgressTable();
+    }//GEN-LAST:event_btnUpdateprogressActionPerformed
 
     private void cmbLessonTimesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLessonTimesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbLessonTimesActionPerformed
 
     private void btnLessonbookedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLessonbookedActionPerformed
-        // Buttons for customer to book lessons use username as identifier for the bookings
-        try{
-
-            run.getConnection();
-            conn = run.con;
-            startString = "beginner";
-
-            booking = "UPDATE Lessons SET Customer='"+loggedinUser+"',lessonDate ='"+txtLessonDates.getText() +"',lessonTime ='"+ cmbLessonTimes.getSelectedItem().toString()+ "',GCU_status='"+ startString +
-            "' where lessonType='"+cmbLessons_available.getSelectedItem().toString()+"';";
-
-            pst = conn.prepareStatement(booking);
-            pst.execute();
-
-            txtLessonDates.setText("");
-
-            JOptionPane.showMessageDialog(null, "Lesssons booked\n");
-
-            conn.close();
-
-        }
-
-        catch(Exception e){
-
-            System.err.println(e);
-
-        }
+        // Button for customer to book lessons use username as identifier for the bookings makes use of the booklesson method
+        booklesson();
     }//GEN-LAST:event_btnLessonbookedActionPerformed
 
     private void cmbLessons_availableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLessons_availableActionPerformed
@@ -409,26 +437,7 @@ public class GCUbake extends javax.swing.JFrame {
 
     private void btncancel_lessonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancel_lessonActionPerformed
         //cancel from customer perspective
-        
-        try{
-            
-            SelectedRow = tableCustomer.getValueAt(tableCustomer.getSelectedRow(), 1).toString();
-            System.out.print(SelectedRow);
-            cancelled = "cancelled";
-            query = "UPDATE Lessons set GCU_status = '"+ cancelled +"' where lessonDate ='" + SelectedRow +"';";
-            
-            pst = conn.prepareStatement(query);
-            pst.execute();
-            conn.close();
-            JOptionPane.showMessageDialog(null, "Lesson cancelled");
-            
-        }
-        
-        catch(Exception e){
-            System.err.print(e);
-        
-        
-        }
+        cancelLessoncustomer();
     }//GEN-LAST:event_btncancel_lessonActionPerformed
 
     /**
@@ -469,11 +478,11 @@ public class GCUbake extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnCustomerLogout;
     private javax.swing.JButton btnLessonbooked;
+    private javax.swing.JButton btnUpdateprogress;
     private javax.swing.JToggleButton btncancel_lesson;
     private javax.swing.JComboBox<String> cmbLessonTimes;
     private javax.swing.JComboBox<String> cmbLessons_available;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
