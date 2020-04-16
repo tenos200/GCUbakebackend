@@ -168,10 +168,10 @@ public class Menu extends javax.swing.JFrame {
         be able to identify which user was logged in.
         */
         
-        logged_in_customer = txtLoginuser.getText();
         GCUbake test = new GCUbake(logged_in_customer);
         this.dispose();
         test.setVisible(true);
+        
     }
     
     private void staffLoggin(){
@@ -224,26 +224,19 @@ public class Menu extends javax.swing.JFrame {
                 pst.setString(5,txtRegemail.getText());
                 pst.setString(6,txtRegusername.getText());
                 pst.setString(7,regPassword1.getText());
+                
                 pst.execute();
-
                 String query2 = "INSERT INTO Login(username, password)" + "VALUES (?, ?)";
                 pst = con.prepareStatement(query2);
                 pst.setString(1,txtRegusername.getText());
                 pst.setString(2,regPassword1.getText());
                 pst.execute();
                 con.close();
+                
+                
                 JOptionPane.showMessageDialog(null, "Registration completed!");
-
-                txtRegfirstname.setText("");
-                txtReglastname.setText("");
-                txtRegphone.setText("");
-                txtRegemail.setText("");
-                txtRegusername.setText("");
-                regPassword1.setText("");
-                regPassword2.setText("");
-                this.dispose();
                 logged_in_customer = txtRegusername.getText();
-                passUsername();
+                passUsername();   
                 
             }
 
@@ -365,7 +358,7 @@ public class Menu extends javax.swing.JFrame {
         setBackground(new java.awt.Color(102, 102, 102));
 
         Booking.setBackground(new java.awt.Color(102, 102, 102));
-        Booking.setFont(new java.awt.Font("Menlo", 1, 18)); // NOI18N
+        Booking.setFont(new java.awt.Font("Menlo", 1, 24)); // NOI18N
 
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -450,7 +443,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(17, 17, 17))
         );
 
-        Booking.addTab("Login", jPanel1);
+        Booking.addTab("LOGIN", jPanel1);
 
         btnRegister.setText("Register");
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
@@ -583,7 +576,7 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        Booking.addTab("Register", jPanel2);
+        Booking.addTab("REGISTER", jPanel2);
 
         jLabel9.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
         jLabel9.setText("Username:");
@@ -633,7 +626,7 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(btnStafflogin, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        Booking.addTab("Staff", jPanel3);
+        Booking.addTab("STAFF", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -680,6 +673,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         registerCustomer();
+        
+        
 
     }//GEN-LAST:event_btnRegisterActionPerformed
 

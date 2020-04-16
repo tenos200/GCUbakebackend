@@ -237,10 +237,11 @@ public class staffPage extends javax.swing.JFrame {
         txtLessonChef = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         loggout_staff_ = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTabbedPane1.setFont(new java.awt.Font("Menlo", 1, 18)); // NOI18N
+        jTabbedPane1.setFont(new java.awt.Font("Menlo", 1, 24)); // NOI18N
 
         tableStaffbooking.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -310,7 +311,7 @@ public class staffPage extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Bookings", jPanel1);
+        jTabbedPane1.addTab("BOOKINGS", jPanel1);
 
         tableLessons.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -403,7 +404,7 @@ public class staffPage extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Create Lessons", jPanel2);
+        jTabbedPane1.addTab("CREATE LESSON", jPanel2);
 
         loggout_staff_.setText("Logout");
         loggout_staff_.addActionListener(new java.awt.event.ActionListener() {
@@ -412,24 +413,34 @@ public class staffPage extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gcurefined/GCUBake_logo_resized.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(280, Short.MAX_VALUE)
-                .addComponent(loggout_staff_, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(265, 265, 265))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(260, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(loggout_staff_, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(265, 265, 265))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(253, 253, 253))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(379, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(loggout_staff_, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
 
-        jTabbedPane1.addTab("Logout", jPanel3);
+        jTabbedPane1.addTab("LOGOUT", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -528,6 +539,7 @@ public class staffPage extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbSessionsRequired;
     private javax.swing.JButton create_lesson_;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;

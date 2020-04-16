@@ -184,10 +184,10 @@ public class GCUbake extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tableCustomer = new javax.swing.JTable();
-        btnUpdateprogress = new javax.swing.JButton();
         btncancel_lesson = new javax.swing.JToggleButton();
         jPanel4 = new javax.swing.JPanel();
         btnCustomerLogout = new javax.swing.JToggleButton();
+        jLabel3 = new javax.swing.JLabel();
 
         jInternalFrame1.setVisible(true);
 
@@ -206,7 +206,7 @@ public class GCUbake extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTabbedPane1.setFont(new java.awt.Font("Menlo", 1, 18)); // NOI18N
+        jTabbedPane1.setFont(new java.awt.Font("Menlo", 1, 24)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
         jLabel1.setText("Lessons available:");
@@ -304,7 +304,7 @@ public class GCUbake extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Book Lesson", jPanel1);
+        jTabbedPane1.addTab("BOOKINGS", jPanel1);
 
         jLabel2.setText("At this page you are able to view your on-going status here at GCUbake");
 
@@ -320,13 +320,6 @@ public class GCUbake extends javax.swing.JFrame {
             }
         ));
         jScrollPane3.setViewportView(tableCustomer);
-
-        btnUpdateprogress.setText("Update");
-        btnUpdateprogress.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateprogressActionPerformed(evt);
-            }
-        });
 
         btncancel_lesson.setText("Cancel lesson");
         btncancel_lesson.addActionListener(new java.awt.event.ActionListener() {
@@ -346,13 +339,11 @@ public class GCUbake extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(btnUpdateprogress, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(97, 97, 97)
-                        .addComponent(btncancel_lesson, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(113, 113, 113)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(233, 233, 233)
+                        .addComponent(btncancel_lesson, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -362,14 +353,12 @@ public class GCUbake extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnUpdateprogress, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                    .addComponent(btncancel_lesson, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btncancel_lesson, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Progress", jPanel3);
+        jTabbedPane1.addTab("PROGRESS", jPanel3);
 
         btnCustomerLogout.setFont(new java.awt.Font("Menlo", 0, 18)); // NOI18N
         btnCustomerLogout.setText("Logout");
@@ -379,24 +368,31 @@ public class GCUbake extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gcurefined/GCUBake_logo_resized.png"))); // NOI18N
+        jLabel3.setText("jLabel3");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(192, 192, 192)
-                .addComponent(btnCustomerLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCustomerLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(214, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(371, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addComponent(btnCustomerLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Logout", jPanel4);
+        jTabbedPane1.addTab("LOGOUT", jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -418,11 +414,6 @@ public class GCUbake extends javax.swing.JFrame {
         Menu run = new Menu();
         run.setVisible(true);
     }//GEN-LAST:event_btnCustomerLogoutActionPerformed
-
-    private void btnUpdateprogressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateprogressActionPerformed
-
-        updateviewProgressTable();
-    }//GEN-LAST:event_btnUpdateprogressActionPerformed
 
     private void cmbLessonTimesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLessonTimesActionPerformed
         // TODO add your handling code here:
@@ -480,7 +471,6 @@ public class GCUbake extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnCustomerLogout;
     private javax.swing.JButton btnLessonbooked;
-    private javax.swing.JButton btnUpdateprogress;
     private javax.swing.JToggleButton btncancel_lesson;
     private javax.swing.JComboBox<String> cmbLessonTimes;
     private javax.swing.JComboBox<String> cmbLessons_available;
@@ -488,6 +478,7 @@ public class GCUbake extends javax.swing.JFrame {
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;

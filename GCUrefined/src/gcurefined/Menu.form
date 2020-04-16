@@ -86,7 +86,7 @@
           <Color blue="66" green="66" red="66" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Menlo" size="18" style="1"/>
+          <Font name="Menlo" size="24" style="1"/>
         </Property>
       </Properties>
 
@@ -100,8 +100,8 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Login">
-                <Property name="tabTitle" type="java.lang.String" value="Login"/>
+              <JTabbedPaneConstraints tabName="LOGIN">
+                <Property name="tabTitle" type="java.lang.String" value="LOGIN"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -236,8 +236,8 @@
         <Container class="javax.swing.JPanel" name="jPanel2">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Register">
-                <Property name="tabTitle" type="java.lang.String" value="Register"/>
+              <JTabbedPaneConstraints tabName="REGISTER">
+                <Property name="tabTitle" type="java.lang.String" value="REGISTER"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -449,8 +449,8 @@
         <Container class="javax.swing.JPanel" name="jPanel3">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Staff">
-                <Property name="tabTitle" type="java.lang.String" value="Staff"/>
+              <JTabbedPaneConstraints tabName="STAFF">
+                <Property name="tabTitle" type="java.lang.String" value="STAFF"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
